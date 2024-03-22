@@ -1,3 +1,4 @@
+import { Timer } from './components';
 import { useTimer } from './hooks/useTimer';
 import './styles.css';
 
@@ -11,7 +12,7 @@ export const PomodoroApp = () => {
     <div className="container">
       <h1>Técnica Pomodoro</h1>
       {/* Timer */}
-      <div id="timer">{`${time.minutes.toString().padStart(2, '0')}:${time.seconds.toString().padStart(2, '0')}`}</div>
+      <Timer time={time} />
       {/* Start button */}
       <button id="startBtn" onClick={isPaused ? startTimer : pauseTimer}>
         {isPaused ? 'Start' : 'Pause'}
