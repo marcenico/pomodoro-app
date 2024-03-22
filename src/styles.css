@@ -1,46 +1,112 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
+/* #region VARIABLES */
+:root {
+  --danger-color-hover: #c82333;
+  --danger-color: #dc3545;
+  --font-color: #333;
+  --primary-color-hover: #0069d9;
+  --primary-color: #007bff;
+  --white-color: #fff;
 }
-.container {
+/* #endregion VARIABLES */
+
+/* #region RESET CSS */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  color: var(--font-color);
+  line-height: 1.5;
+}
+
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  justify-content: center;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/* #endregion RESET CSS */
+
+/* #region UTILS CSS */
+.text-center {
   text-align: center;
 }
-h1 {
-  color: #333;
+
+.mt-16 {
+  margin-top: 1rem;
 }
-#timer {
-  font-size: 2em;
-  margin: 20px 0;
+/* #endregion UTILS CSS */
+
+/* #region COMPONENTS CSS */
+.main-container {
+  display: grid;
+  gap: 1rem;
 }
-#startBtn,
-#pauseBtn,
-#resetBtn {
-  padding: 10px 20px;
-  font-size: 1em;
-  margin: 10px;
+
+.timer {
+  font-size: 2rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.actions__button {
+  border-radius: 0.25rem;
   cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
 }
-#startBtn {
-  background-color: #4caf50;
-  color: #fff;
+
+.actions__button--start {
+  background-color: var(--primary-color);
   border: none;
+  color: var(--white-color);
 }
-#startBtn:hover {
-  background-color: #45a049;
+
+.actions__button--start:hover {
+  background-color: var(--primary-color-hover);
 }
-#pauseBtn,
-#resetBtn {
-  background-color: #f44336;
-  color: #fff;
+
+.actions__button--reset {
+  background-color: var(--danger-color);
   border: none;
+  color: var(--white-color);
 }
-#pauseBtn:hover,
-#resetBtn:hover {
-  background-color: #d32f2f;
+
+.actions__button--reset:hover {
+  background-color: var(--danger-color-hover);
 }
+/* #endregion COMPONENTS CSS */
