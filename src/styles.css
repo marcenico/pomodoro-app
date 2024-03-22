@@ -26,23 +26,17 @@ html {
 
 body {
   -webkit-font-smoothing: antialiased;
-  color: var(--font-color);
-  line-height: 1.5;
-}
-
-body {
   align-items: center;
+  color: var(--font-color);
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
-  height: 100vh;
+  height: 100dvh;
   justify-content: center;
+  line-height: 1.5;
 }
 
-input,
-button,
-textarea,
-select {
+button {
   font: inherit;
 }
 
@@ -54,6 +48,19 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 /* #endregion RESET CSS */
 
