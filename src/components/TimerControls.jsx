@@ -2,13 +2,13 @@ import React from 'react';
 
 export const TimerControls = ({ isPaused, pauseTimer, resetTimer, startTimer }) => {
   return (
-    <section className="actions">
+    <section className="timer-controls">
       {/* Start button */}
-      <button className="actions__button actions__button--start" onClick={isPaused ? startTimer : pauseTimer}>
+      <button className="timer-controls__btn timer-controls__btn--start" onClick={isPaused ? startTimer : pauseTimer}>
         {isPaused ? 'Start' : 'Pause'}
       </button>
       {/* Reset button */}
-      <button className="actions__button actions__button--reset" onClick={resetTimer}>
+      <button className="timer-controls__btn timer-controls__btn--reset" onClick={resetTimer}>
         Reset
       </button>
     </section>
