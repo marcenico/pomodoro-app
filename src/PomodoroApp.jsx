@@ -1,4 +1,4 @@
-import { Actions, Timer } from './components';
+import { Timer, TimerControls } from './components';
 import { useTimer } from './hooks/useTimer';
 import './styles.css';
 
@@ -12,7 +12,7 @@ export const PomodoroApp = () => {
     <main className="main-container text-center">
       <h1>Técnica Pomodoro</h1>
       <Timer time={time} />
-      <Actions isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />
+      <TimerControls isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />
     </main>
   );
 };

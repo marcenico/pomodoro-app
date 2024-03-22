@@ -1,2 +1,2 @@
-export * from './Actions';
 export * from './Timer';
+export * from './TimerControls';

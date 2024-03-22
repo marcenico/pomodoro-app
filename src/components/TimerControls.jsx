@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Actions = ({ isPaused, pauseTimer, resetTimer, startTimer }) => {
+export const TimerControls = ({ isPaused, pauseTimer, resetTimer, startTimer }) => {
   return (
     <section className="actions">
       {/* Start button */}
