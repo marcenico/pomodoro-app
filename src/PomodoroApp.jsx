@@ -1,18 +1,6 @@
-import { Timer, TimerControls } from './components';
-import { useTimer } from './hooks/useTimer';
+import { AppContainer } from './components';
 import './styles.css';
 
 export const PomodoroApp = () => {
-  const { time, isPaused, startTimer, pauseTimer, resetTimer } = useTimer({
-    minutes: 25,
-    seconds: 0
-  });
-
-  return (
-    <main className="main-container text-center">
-      <h1>Técnica Pomodoro</h1>
-      <Timer time={time} />
-      <TimerControls isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />
-    </main>
-  );
+  return <AppContainer />;
 };

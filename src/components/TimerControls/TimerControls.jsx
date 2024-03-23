@@ -1,14 +1,15 @@
 import React from 'react';
+import { container, btn, btnStart, btnReset } from './TimerControls.module.css';
 
 export const TimerControls = ({ isPaused, pauseTimer, resetTimer, startTimer }) => {
   return (
-    <section className="timer-controls">
+    <section className={container}>
       {/* Start button */}
-      <button className="timer-controls__btn timer-controls__btn--start" onClick={isPaused ? startTimer : pauseTimer}>
+      <button className={`${btn} ${btnStart}`} onClick={isPaused ? startTimer : pauseTimer}>
         {isPaused ? 'Start' : 'Pause'}
       </button>
       {/* Reset button */}
-      <button className="timer-controls__btn timer-controls__btn--reset" onClick={resetTimer}>
+      <button className={`${btn} ${btnReset}`} onClick={resetTimer}>
         Reset
       </button>
     </section>

@@ -1,4 +1,3 @@
-/* #region VARIABLES */
 :root {
   --danger-color-hover: #c82333;
   --danger-color: #dc3545;
@@ -7,9 +6,7 @@
   --primary-color: #007bff;
   --white-color: #fff;
 }
-/* #endregion VARIABLES */
 
-/* #region RESET CSS */
 *,
 *::before,
 *::after {
@@ -62,58 +59,3 @@ h6 {
 p {
   text-wrap: pretty;
 }
-/* #endregion RESET CSS */
-
-/* #region UTILS CSS */
-.text-center {
-  text-align: center;
-}
-
-.mt-16 {
-  margin-top: 1rem;
-}
-/* #endregion UTILS CSS */
-
-/* #region COMPONENTS CSS */
-.main-container {
-  display: grid;
-  gap: 1rem;
-}
-
-.timer {
-  font-size: 2rem;
-}
-
-.timer-controls {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.timer-controls__btn {
-  border-radius: 0.25rem;
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-}
-
-.timer-controls__btn--start {
-  background-color: var(--primary-color);
-  border: none;
-  color: var(--white-color);
-}
-
-.timer-controls__btn--start:hover {
-  background-color: var(--primary-color-hover);
-}
-
-.timer-controls__btn--reset {
-  background-color: var(--danger-color);
-  border: none;
-  color: var(--white-color);
-}
-
-.timer-controls__btn--reset:hover {
-  background-color: var(--danger-color-hover);
-}
-/* #endregion COMPONENTS CSS */
