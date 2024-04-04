@@ -1,7 +1,7 @@
 import React from 'react';
-import { container, btn, btnStart, btnReset } from './TimerControls.module.css';
+import { btn, btnReset, btnStart, container } from './TimerControls.module.css';
 
-export const TimerControls = ({ isPaused, pauseTimer, resetTimer, startTimer }) => {
+export const TimerControls = ({ startTimer, resetTimer, pauseTimer, isPaused }) => {
   return (
     <section className={container}>
       {/* Start button */}
