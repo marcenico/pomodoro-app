@@ -19,6 +19,12 @@
   width: 2.75rem; /* 44px */
 }
 
+.settingsButton:focus,
+.settingsButton:active {
+  outline: 1px solid var(--blue-600);
+  outline-offset: -1px;
+}
+
 .settingsButton:hover {
   background-color: var(--blue-50);
 }
