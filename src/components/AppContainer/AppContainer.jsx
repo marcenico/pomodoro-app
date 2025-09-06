@@ -4,8 +4,8 @@ import { Timer } from '../Timer/Timer';
 import { TimerControls } from '../TimerControls/TimerControls';
 
 // #region CSS MODULES
-import { textCenter } from '../../styles/utils.module.css';
 import { container } from './AppContainer.module.css';
+import { tCenter } from '../../styles/typography.module.css';
 // #endregion
 
 export const AppContainer = () => {
@@ -15,7 +15,7 @@ export const AppContainer = () => {
   });
 
   return (
-    <main className={`${container} ${textCenter}`}>
+    <main className={`${container} ${tCenter}`}>
       <h1>Técnica Pomodoro</h1>
       <Timer time={time} />
       <TimerControls isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />

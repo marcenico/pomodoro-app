@@ -22,10 +22,6 @@
   line-height: 1rem;
 }
 
-.t-xs {
-  font-size: var(--text-xs);
-}
-
 .t-light {
   font-weight: var(--text-light);
 }
@@ -50,7 +46,7 @@
   text-align: left;
 }
 
-.t-center {
+.tCenter {
   text-align: center;
 }
 

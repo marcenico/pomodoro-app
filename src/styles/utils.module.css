@@ -1,161 +1,161 @@
 /* Display */
-.d-flex {
+.dFlex {
   display: flex;
 }
 
 /* Flex Direction */
-.f-col {
+.fCol {
   flex-direction: column;
 }
 
-.f-row {
+.fRow {
   flex-direction: row;
 }
 
 /* Flex Wrap */
-.f-wrap {
+.fWrap {
   flex-wrap: wrap;
 }
 
-.f-nowrap {
+.fNowrap {
   flex-wrap: nowrap;
 }
 
-.f-wrap-reverse {
+.fWrapReverse {
   flex-wrap: wrap-reverse;
 }
 
 /* Justify Content */
-.jc-start {
+.jcStart {
   justify-content: flex-start;
 }
 
-.jc-end {
+.jcEnd {
   justify-content: flex-end;
 }
 
-.jc-center {
+.jcCenter {
   justify-content: center;
 }
 
-.jc-between {
+.jcBetween {
   justify-content: space-between;
 }
 
-.jc-around {
+.jcAround {
   justify-content: space-around;
 }
 
-.jc-evenly {
+.jcEvenly {
   justify-content: space-evenly;
 }
 
 /* Align Items */
-.ai-start {
+.aiStart {
   align-items: flex-start;
 }
 
-.ai-end {
+.aiEnd {
   align-items: flex-end;
 }
 
-.ai-center {
+.aiCenter {
   align-items: center;
 }
 
-.ai-stretch {
+.aiStretch {
   align-items: stretch;
 }
 
-.ai-baseline {
+.aiBaseline {
   align-items: baseline;
 }
 
 /* Align Content */
-.ac-start {
+.acStart {
   align-content: flex-start;
 }
 
-.ac-end {
+.acEnd {
   align-content: flex-end;
 }
 
-.ac-center {
+.acCenter {
   align-content: center;
 }
 
-.ac-stretch {
+.acStretch {
   align-content: stretch;
 }
 
-.ac-between {
+.acBetween {
   align-content: space-between;
 }
 
-.ac-around {
+.acAround {
   align-content: space-around;
 }
 
 /* Align Self */
-.as-start {
+.asStart {
   align-self: flex-start;
 }
 
-.as-end {
+.asEnd {
   align-self: flex-end;
 }
 
-.as-center {
+.asCenter {
   align-self: center;
 }
 
-.as-stretch {
+.asStretch {
   align-self: stretch;
 }
 
-.as-baseline {
+.asBaseline {
   align-self: baseline;
 }
 
 /* Flex Properties */
-.f-1 {
+.f1 {
   flex: 1;
 }
 
-.f-auto {
+.fAuto {
   flex: auto;
 }
 
-.f-none {
+.fNone {
   flex: none;
 }
 
-.f-grow-0 {
+.fGrow0 {
   flex-grow: 0;
 }
 
-.f-grow-1 {
+.fGrow1 {
   flex-grow: 1;
 }
 
-.f-shrink-0 {
+.fShrink0 {
   flex-shrink: 0;
 }
 
-.f-shrink-1 {
+.fShrink1 {
   flex-shrink: 1;
 }
 
-.f-basis-auto {
+.fBasisAuto {
   flex-basis: auto;
 }
 
-.f-basis-0 {
+.fBasis0 {
   flex-basis: 0;
 }
 
 /* Gaps */
-.gap-0 {
+.gap0 {
   gap: 0;
 }
 
