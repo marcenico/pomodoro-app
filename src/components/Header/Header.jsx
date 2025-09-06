@@ -1,6 +1,4 @@
 import { HeaderMenu } from '@components/HeaderMenu/HeaderMenu';
-import { t950, tBold, tXL } from '@styles/typography.module.css';
-import { aiCenter, dFlex, jcBetween, jcCenter } from '@styles/utils.module.css';
 import React, { useState } from 'react';
 import { header, settingsButton, settingsIcon } from './Header.module.css';
 
@@ -12,10 +10,10 @@ export const Header = () => {
   };
 
   return (
-    <header className={`${header} ${dFlex} ${jcBetween} ${aiCenter}`}>
-      <h1 className={`${tXL} ${tBold} ${t950}`}>The Pomodoro Technique</h1>
+    <header className={`${header} d-flex jc-between ai-center`}>
+      <h1 className="t-xl t-bold t-950">The Pomodoro Technique</h1>
       <button
-        className={`${settingsButton} ${dFlex} ${aiCenter} ${jcCenter}`}
+        className={`${settingsButton} d-flex ai-center jc-center`}
         onClick={toggleMenu}
         aria-label="Abrir configuración de sesiones">
         <img className={settingsIcon} src="/assets/settings.svg" alt="Configuración" />

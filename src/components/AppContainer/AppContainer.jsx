@@ -5,8 +5,6 @@ import { useTimer } from '@hooks/useTimer';
 import React from 'react';
 
 // #region CSS MODULES
-import { tCenter } from '@styles/typography.module.css';
-import { container } from '@styles/utils.module.css';
 // #endregion
 
 export const AppContainer = () => {
@@ -18,7 +16,7 @@ export const AppContainer = () => {
   return (
     <>
       <Header />
-      <main className={`${container} ${tCenter}`}>
+      <main className={`container t-center`}>
         <Timer time={time} />
         <TimerControls isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />
       </main>
