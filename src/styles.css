@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap');
 @import './styles/variables.module.css';
 @import './styles/typography.module.css';
+@import './styles/utils.module.css';
 
 *,
 *::before,
@@ -64,6 +65,3 @@ h6 {
 p {
   margin-bottom: 0;
 }
-
-@import './styles/typography.module.css';
-@import './styles/utils.module.css';
