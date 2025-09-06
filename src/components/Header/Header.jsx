@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
 import { HeaderMenu } from '@components/HeaderMenu/HeaderMenu';
-import styles from './Header.module.css';
+import { t950, tBold, tXL } from '@styles/typography.module.css';
+import { aiCenter, dFlex, jcBetween, jcCenter } from '@styles/utils.module.css';
+import React, { useState } from 'react';
+import { header, settingsButton, settingsIcon } from './Header.module.css';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,17 +12,14 @@ export const Header = () => {
   };
 
   return (
-    <header className={styles.header}>
-      <div className={styles.headerCard}>
-        <h1 className={styles.title}>The Pomodoro Technique</h1>
-        <button className={styles.settingsButton} onClick={toggleMenu} aria-label="Abrir configuración de sesiones">
-          <div className={styles.settingsIcon}>
-            <div className={styles.settingsLine}></div>
-            <div className={styles.settingsLine}></div>
-            <div className={styles.settingsLine}></div>
-          </div>
-        </button>
-      </div>
+    <header className={`${header} ${dFlex} ${jcBetween} ${aiCenter}`}>
+      <h1 className={`${tXL} ${tBold} ${t950}`}>The Pomodoro Technique</h1>
+      <button
+        className={`${settingsButton} ${dFlex} ${aiCenter} ${jcCenter}`}
+        onClick={toggleMenu}
+        aria-label="Abrir configuración de sesiones">
+        <img className={settingsIcon} src="/assets/settings.svg" alt="Configuración" />
+      </button>
 
       <HeaderMenu isOpen={isMenuOpen} />
     </header>
