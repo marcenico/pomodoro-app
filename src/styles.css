@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
-  --danger-color-hover: #c82333;
-  --danger-color: #dc3545;
-  --font-color: #333;
-  --primary-color-hover: #0069d9;
-  --primary-color: #007bff;
-  --white-color: #fff;
+  --blue-0: #f7fbff;
+  --blue-50: #eaf4ff;
+  --blue-100: #d6edff;
+  --blue-200: #b5dfff;
+  --blue-300: #88c9ff;
+  --blue-500: #4faeff;
+  --blue-600: #1c5ba1;
+  --blue-950: #1e3a5f;
 }
 
 *,
@@ -27,7 +31,7 @@ body {
   color: var(--font-color);
   display: flex;
   flex-direction: column;
-  font-family: Arial, sans-serif;
+  font-family: 'Advent Pro', sans-serif;
   height: 100dvh;
   justify-content: center;
   line-height: 1.5;
