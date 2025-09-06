@@ -1,3 +1,4 @@
+import { Header } from '@components/Header/Header';
 import { Timer } from '@components/Timer/Timer';
 import { TimerControls } from '@components/TimerControls/TimerControls';
 import { useTimer } from '@hooks/useTimer';
@@ -15,10 +16,12 @@ export const AppContainer = () => {
   });
 
   return (
-    <main className={`${container} ${tCenter}`}>
-      <h1>Técnica Pomodoro</h1>
-      <Timer time={time} />
-      <TimerControls isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />
-    </main>
+    <>
+      <Header />
+      <main className={`${container} ${tCenter}`}>
+        <Timer time={time} />
+        <TimerControls isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />
+      </main>
+    </>
   );
 };
