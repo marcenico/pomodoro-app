@@ -22,7 +22,7 @@
 .settingsButton:focus,
 .settingsButton:active {
   outline: 1px solid var(--blue-600);
-  outline-offset: -1px;
+  outline-offset: 1px;
 }
 
 .settingsButton:hover {

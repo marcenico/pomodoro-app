@@ -12,6 +12,12 @@
   transform: translateY(-1px);
 }
 
+.sessionOption:focus,
+.sessionOption:active {
+  outline: 1px solid var(--blue-600);
+  outline-offset: 1px;
+}
+
 .sessionOption.selected {
   background: var(--blue-500);
   border-color: var(--blue-500);
