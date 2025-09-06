@@ -14,6 +14,7 @@
   --text-regular: 400;
   --text-medium: 500;
   --text-bold: 700;
+  --transition-normal: 0.3s ease;
 }
 
 *,
@@ -25,9 +26,9 @@
 }
 
 html {
+  font-size: 12px;
   scroll-behavior: smooth;
   transition: all var(--transition-normal);
-  font-size: 12px;
 
   @media (width > 385px) {
     font-size: 14px;
@@ -51,7 +52,7 @@ body {
   color: var(--blue-950);
   font-family: var(--font-family);
   line-height: 1.6;
-  min-height: 100vh;
+  min-height: 100dvh;
   transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
@@ -64,15 +65,14 @@ button {
   font: inherit;
 }
 
+span,
+p,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-weight: var(--text-bold);
-  line-height: 1.2;
-  color: var(--blue-950);
   transition: color var(--transition-normal);
 }
 
