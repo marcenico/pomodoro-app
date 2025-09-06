@@ -4,8 +4,8 @@ import { Timer } from '../Timer/Timer';
 import { TimerControls } from '../TimerControls/TimerControls';
 
 // #region CSS MODULES
-import { container } from './AppContainer.module.css';
 import { tCenter } from '../../styles/typography.module.css';
+import { container } from '../../styles/utils.module.css';
 // #endregion
 
 export const AppContainer = () => {
