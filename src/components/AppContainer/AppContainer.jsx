@@ -1,11 +1,11 @@
+import { Timer } from '@components/Timer/Timer';
+import { TimerControls } from '@components/TimerControls/TimerControls';
+import { useTimer } from '@hooks/useTimer';
 import React from 'react';
-import { useTimer } from '../../hooks/useTimer';
-import { Timer } from '../Timer/Timer';
-import { TimerControls } from '../TimerControls/TimerControls';
 
 // #region CSS MODULES
-import { tCenter } from '../../styles/typography.module.css';
-import { container } from '../../styles/utils.module.css';
+import { tCenter } from '@styles/typography.module.css';
+import { container } from '@styles/utils.module.css';
 // #endregion
 
 export const AppContainer = () => {
