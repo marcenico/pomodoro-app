@@ -101,3 +101,5 @@ p {
   color: var(--primary-700);
   transition: color var(--transition-normal);
 }
+
+@import './styles/typography.css';
