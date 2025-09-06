@@ -167,6 +167,10 @@
   gap: 0.5rem;
 }
 
+.gap-12 {
+  gap: 0.75rem;
+}
+
 .gap-16 {
   gap: 1rem;
 }
@@ -185,6 +189,30 @@
 
 .gap-48 {
   gap: 3rem;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-4 {
+  padding: 0.25rem;
+}
+
+.p-8 {
+  padding: 0.5rem;
+}
+
+.p-12 {
+  padding: 0.75rem;
+}
+
+.p-16 {
+  padding: 1rem;
+}
+
+.p-24 {
+  padding: 1.5rem;
 }
 
 /* Contenedores */

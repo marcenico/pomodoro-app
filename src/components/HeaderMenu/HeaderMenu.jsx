@@ -1,46 +1,37 @@
-import React from 'react';
-import styles from './HeaderMenu.module.css';
+import React, { useState } from 'react';
+import { sessionsGrid, sessionsMenu } from './HeaderMenu.module.css';
+import { SessionOption } from './SessionOption';
 
 export const HeaderMenu = ({ isOpen }) => {
+  const [sessionOptions, setSessionOptions] = useState([
+    { id: 'light-focus', name: 'Light Focus', times: '15min 5min 10min', isSelected: false },
+    { id: 'classic-pomodoro', name: 'Classic Pomodoro', times: '25min 5min 15min', isSelected: true },
+    { id: 'deep-work', name: 'Deep Work', times: '40min 10min 20min', isSelected: false },
+    { id: 'full-sprint', name: 'Full Sprint', times: '60min 12min 25min', isSelected: false }
+  ]);
+
   if (!isOpen) return null;
 
+  const handleSessionSelect = (sessionId) => {
+    sessionOptions.forEach((session) => {
+      session.isSelected = session.id === sessionId;
+      setSessionOptions([...sessionOptions]);
+    });
+  };
+
   return (
-    <div className={styles.sessionsMenu}>
-      <h2 className={styles.menuTitle}>Sessions settings</h2>
-      <div className={styles.sessionsGrid}>
-        <button className={styles.sessionOption}>
-          <div className={styles.radioButton}></div>
-          <div className={styles.sessionInfo}>
-            <span className={styles.sessionName}>Light Focus</span>
-            <span className={styles.sessionTimes}>15min 5min 10min</span>
-          </div>
-        </button>
-
-        <button className={`${styles.sessionOption} ${styles.selected}`}>
-          <div className={`${styles.radioButton} ${styles.selected}`}>
-            <div className={styles.checkmark}></div>
-          </div>
-          <div className={styles.sessionInfo}>
-            <span className={styles.sessionName}>Classic Pomodoro</span>
-            <span className={styles.sessionTimes}>25min 5min 15min</span>
-          </div>
-        </button>
-
-        <button className={styles.sessionOption}>
-          <div className={styles.radioButton}></div>
-          <div className={styles.sessionInfo}>
-            <span className={styles.sessionName}>Deep Work</span>
-            <span className={styles.sessionTimes}>40min 10min 20min</span>
-          </div>
-        </button>
-
-        <button className={styles.sessionOption}>
-          <div className={styles.radioButton}></div>
-          <div className={styles.sessionInfo}>
-            <span className={styles.sessionName}>Full Sprint</span>
-            <span className={styles.sessionTimes}>60min 12min 25min</span>
-          </div>
-        </button>
+    <div className={`${sessionsMenu} d-flex f-col gap-12 p-16`}>
+      <h2 className={`t-lg t-bold t-950`}>Sessions settings</h2>
+      <div className={`${sessionsGrid} gap-1`}>
+        {sessionOptions.map((session) => (
+          <SessionOption
+            key={session.id}
+            name={session.name}
+            times={session.times}
+            isSelected={session.isSelected}
+            onClick={() => handleSessionSelect(session.id)}
+          />
+        ))}
       </div>
     </div>
   );
