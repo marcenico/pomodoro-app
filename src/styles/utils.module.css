@@ -1,7 +1,287 @@
-.textCenter {
+/* Display */
+.d-flex {
+  display: flex;
+}
+
+/* Flex Direction */
+.f-col {
+  flex-direction: column;
+}
+
+.f-row {
+  flex-direction: row;
+}
+
+/* Flex Wrap */
+.f-wrap {
+  flex-wrap: wrap;
+}
+
+.f-nowrap {
+  flex-wrap: nowrap;
+}
+
+.f-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* Justify Content */
+.jc-start {
+  justify-content: flex-start;
+}
+
+.jc-end {
+  justify-content: flex-end;
+}
+
+.jc-center {
+  justify-content: center;
+}
+
+.jc-between {
+  justify-content: space-between;
+}
+
+.jc-around {
+  justify-content: space-around;
+}
+
+.jc-evenly {
+  justify-content: space-evenly;
+}
+
+/* Align Items */
+.ai-start {
+  align-items: flex-start;
+}
+
+.ai-end {
+  align-items: flex-end;
+}
+
+.ai-center {
+  align-items: center;
+}
+
+.ai-stretch {
+  align-items: stretch;
+}
+
+.ai-baseline {
+  align-items: baseline;
+}
+
+/* Align Content */
+.ac-start {
+  align-content: flex-start;
+}
+
+.ac-end {
+  align-content: flex-end;
+}
+
+.ac-center {
+  align-content: center;
+}
+
+.ac-stretch {
+  align-content: stretch;
+}
+
+.ac-between {
+  align-content: space-between;
+}
+
+.ac-around {
+  align-content: space-around;
+}
+
+/* Align Self */
+.as-start {
+  align-self: flex-start;
+}
+
+.as-end {
+  align-self: flex-end;
+}
+
+.as-center {
+  align-self: center;
+}
+
+.as-stretch {
+  align-self: stretch;
+}
+
+.as-baseline {
+  align-self: baseline;
+}
+
+/* Flex Properties */
+.f-1 {
+  flex: 1;
+}
+
+.f-auto {
+  flex: auto;
+}
+
+.f-none {
+  flex: none;
+}
+
+.f-grow-0 {
+  flex-grow: 0;
+}
+
+.f-grow-1 {
+  flex-grow: 1;
+}
+
+.f-shrink-0 {
+  flex-shrink: 0;
+}
+
+.f-shrink-1 {
+  flex-shrink: 1;
+}
+
+.f-basis-auto {
+  flex-basis: auto;
+}
+
+.f-basis-0 {
+  flex-basis: 0;
+}
+
+/* Gaps */
+.gap-0 {
+  gap: 0;
+}
+
+.gap-4 {
+  gap: 0.25rem;
+}
+
+.gap-8 {
+  gap: 0.5rem;
+}
+
+.gap-16 {
+  gap: 1rem;
+}
+
+.gap-24 {
+  gap: 1.5rem;
+}
+
+.gap-32 {
+  gap: 2rem;
+}
+
+.gap-40 {
+  gap: 2.5rem;
+}
+
+.gap-48 {
+  gap: 3rem;
+}
+
+/* Contenedores */
+.container {
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+/* Textos */
+.t-xsm {
+  /* 8px/12px */
+  font-size: 0.625rem;
+  line-height: 0.625rem;
+}
+
+.t-sm {
+  /* 12px/16px */
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.t-paragraph {
+  /* 16px/24px */
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.t-subheading {
+  /* 18px/28px */
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.t-0 {
+  color: var(--blue-0);
+}
+
+.t-50 {
+  color: var(--blue-50);
+}
+
+.t-100 {
+  color: var(--blue-100);
+}
+
+.t-200 {
+  color: var(--blue-200);
+}
+
+.t-300 {
+  color: var(--blue-300);
+}
+
+.t-500 {
+  color: var(--blue-500);
+}
+
+.t-600 {
+  color: var(--blue-600);
+}
+
+.t-950 {
+  color: var(--blue-950);
+}
+
+.t-light {
+  font-weight: var(--text-light);
+}
+
+.t-regular {
+  font-weight: var(--text-regular);
+}
+
+.t-medium {
+  font-weight: var(--text-medium);
+}
+
+.t-bold {
+  font-weight: var(--text-bold);
+}
+
+.t-center {
   text-align: center;
 }
 
-.mt16 {
-  margin-top: 1rem;
+.t-left {
+  text-align: left;
+}
+
+.t-right {
+  text-align: right;
+}
+
+.t-uppercase {
+  text-transform: uppercase;
+}
+
+.w-100 {
+  width: 100%;
 }

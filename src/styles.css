@@ -9,57 +9,95 @@
   --blue-500: #4faeff;
   --blue-600: #1c5ba1;
   --blue-950: #1e3a5f;
+  --font-family: 'Advent Pro', sans-serif, system-ui;
+  --text-light: 300;
+  --text-regular: 400;
+  --text-medium: 500;
+  --text-bold: 700;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-* {
   margin: 0;
+  padding: 0;
 }
 
 html {
-  font-size: 16px;
+  scroll-behavior: smooth;
+  transition: all var(--transition-normal);
+  font-size: 12px;
+
+  @media (width > 385px) {
+    font-size: 14px;
+  }
+
+  @media (width > 430px) {
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
+
+  @media (width > 1440px) {
+    font-size: 22px;
+  }
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
-  align-items: center;
-  color: var(--font-color);
-  display: flex;
-  flex-direction: column;
-  font-family: 'Advent Pro', sans-serif;
-  height: 100dvh;
-  justify-content: center;
-  line-height: 1.5;
+  background-color: var(--blue-0);
+  color: var(--blue-950);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+main {
+  max-width: 1168px;
+  margin: 0 auto;
 }
 
 button {
   font: inherit;
 }
 
-p,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  overflow-wrap: break-word;
+  font-weight: var(--text-bold);
+  line-height: 1.2;
+  color: var(--blue-950);
+  transition: color var(--transition-normal);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  text-wrap: balance;
+h1 {
+  font-size: 3.625rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 3rem;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 2.375rem;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 1.75rem;
+  line-height: 1.2;
 }
 
 p {
-  text-wrap: pretty;
+  margin-bottom: 0;
+  color: var(--primary-700);
+  transition: color var(--transition-normal);
 }
