@@ -9,7 +9,7 @@ export const sessionOptions = [
     id: 'classic-pomodoro',
     name: 'Classic Pomodoro',
     times: '25min 5min 15min',
-    config: { pomodoro: 25, shortBreak: 5, longBreak: 15 }
+    config: { pomodoro: 1, shortBreak: 1, longBreak: 1 }
   },
   {
     id: 'deep-work',

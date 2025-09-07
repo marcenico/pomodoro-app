@@ -4,11 +4,12 @@ import { Timer } from '@components/Timer/Timer';
 import { TimerControls } from '@components/TimerControls/TimerControls';
 import { sessionOptions } from '@data/sessionOptions';
 import { useTimer } from '@hooks/useTimer';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const AppContainer = () => {
   const [activeTab, setActiveTab] = useState('pomodoro');
   const [selectedSession, setSelectedSession] = useState('classic-pomodoro');
+  const [isAutoTransition, setIsAutoTransition] = useState(false);
 
   // Obtener la configuración de la sesión seleccionada
   const currentSession = sessionOptions.find((session) => session.id === selectedSession);
@@ -20,9 +21,38 @@ export const AppContainer = () => {
     return { minutes, seconds: 0 };
   };
 
-  const { isPaused, isRunning, pauseTimer, refreshTimer, resetTimer, startTimer, stopTimer, time } = useTimer(
-    getTimerConfig(activeTab)
-  );
+  const {
+    isPaused,
+    isRunning,
+    pauseTimer,
+    refreshTimer,
+    resetTimer,
+    startTimer,
+    stopTimer,
+    time,
+    currentCycle,
+    completedPomodoros
+  } = useTimer({
+    ...getTimerConfig(activeTab),
+    pomodoroTime: sessionConfig.pomodoro,
+    shortBreakTime: sessionConfig.shortBreak,
+    longBreakTime: sessionConfig.longBreak
+  });
+
+  // Sincronizar el tab activo con el ciclo actual del timer solo en transiciones automáticas
+  useEffect(() => {
+    if (isAutoTransition && currentCycle && currentCycle !== activeTab) {
+      setActiveTab(currentCycle);
+      setIsAutoTransition(false);
+    }
+  }, [currentCycle, activeTab, isAutoTransition]);
+
+  // Detectar cuando el timer hace una transición automática
+  useEffect(() => {
+    if (currentCycle) {
+      setIsAutoTransition(true);
+    }
+  }, [currentCycle]);
 
   const handleTabChange = (tabId) => setActiveTab(tabId);
   const handleSessionChange = (sessionId) => setSelectedSession(sessionId);
