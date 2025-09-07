@@ -15,7 +15,7 @@ export const AppContainer = () => {
     'long-break': { minutes: 15, seconds: 0 }
   };
 
-  const { time, isPaused, isRunning, startTimer, pauseTimer, stopTimer, resetTimer } = useTimer(
+  const { isPaused, isRunning, pauseTimer, refreshTimer, resetTimer, startTimer, stopTimer, time } = useTimer(
     sessionConfig[activeTab]
   );
 
@@ -34,6 +34,7 @@ export const AppContainer = () => {
             isPaused={isPaused}
             isRunning={isRunning}
             pauseTimer={pauseTimer}
+            refreshTimer={refreshTimer}
             resetTimer={resetTimer}
             startTimer={startTimer}
             stopTimer={stopTimer}

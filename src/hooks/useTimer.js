@@ -39,7 +39,8 @@ export const useTimer = ({ minutes: initMinutes = 25, seconds: initSeconds = 0 }
   const startTimer = () => setStorage({ ...storedValue, isPaused: false, isRunning: true });
   const pauseTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: true });
   const stopTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: false });
+  const refreshTimer = () => setStorage({ ...defaultValue, isPaused: false, isRunning: true });
   const resetTimer = () => setStorage({ ...defaultValue });
 
-  return { ...storedValue, startTimer, pauseTimer, stopTimer, resetTimer };
+  return { ...storedValue, startTimer, pauseTimer, stopTimer, resetTimer, refreshTimer };
 };

@@ -15,7 +15,7 @@ import playIcon from '/assets/play.svg';
 import refreshIcon from '/assets/refresh.svg';
 import stopIcon from '/assets/stop.svg';
 
-export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, isPaused, isRunning }) => {
+export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, refreshTimer, isPaused, isRunning }) => {
   const [showButtons, setShowButtons] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -43,7 +43,7 @@ export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, i
             isAnimating && isRunning ? btnRefreshLeft : ''
           } ${isAnimating && !isRunning ? btnRefreshLeftExit : ''}`}
           onClick={(e) => {
-            resetTimer();
+            refreshTimer();
             e.preventDefault();
           }}>
           <svg
