@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 
 export const useTimer = ({ minutes: initMinutes = 25, seconds: initSeconds = 0 } = {}) => {
-  const defaultValue = { time: { minutes: initMinutes, seconds: initSeconds }, isPaused: true };
+  const defaultValue = { time: { minutes: initMinutes, seconds: initSeconds }, isPaused: true, isRunning: false };
   const { storedValue, setStorage } = useLocalStorage('timerData', { ...defaultValue });
 
   const updateTimer = ({ minutes, seconds }) => {
@@ -13,7 +13,7 @@ export const useTimer = ({ minutes: initMinutes = 25, seconds: initSeconds = 0 }
   };
 
   useEffect(() => {
-    setStorage({ ...storedValue, time: { minutes: initMinutes, seconds: initSeconds } });
+    setStorage({ ...storedValue, time: { minutes: initMinutes, seconds: initSeconds }, isRunning: false });
   }, [initMinutes, initSeconds]);
 
   useEffect(() => {
@@ -26,19 +26,20 @@ export const useTimer = ({ minutes: initMinutes = 25, seconds: initSeconds = 0 }
       if (minutes === 0 && seconds === 0) {
         clearInterval(intervalId);
         alert('¡Tiempo cumplido!');
-        setStorage({ time, isPaused: true });
+        setStorage({ time, isPaused: true, isRunning: false });
       } else {
         const newTime = updateTimer({ minutes, seconds });
-        setStorage({ time: newTime, isPaused: false });
+        setStorage({ time: newTime, isPaused: false, isRunning: true });
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
   }, [storedValue]);
 
-  const startTimer = () => setStorage({ ...storedValue, isPaused: false });
-  const pauseTimer = () => setStorage({ ...storedValue, isPaused: true });
+  const startTimer = () => setStorage({ ...storedValue, isPaused: false, isRunning: true });
+  const pauseTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: true });
+  const stopTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: false });
   const resetTimer = () => setStorage({ ...defaultValue });
 
-  return { ...storedValue, startTimer, pauseTimer, resetTimer };
+  return { ...storedValue, startTimer, pauseTimer, stopTimer, resetTimer };
 };

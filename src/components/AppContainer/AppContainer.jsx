@@ -15,7 +15,9 @@ export const AppContainer = () => {
     'long-break': { minutes: 15, seconds: 0 }
   };
 
-  const { time, isPaused, startTimer, pauseTimer, resetTimer } = useTimer(sessionConfig[activeTab]);
+  const { time, isPaused, isRunning, startTimer, pauseTimer, stopTimer, resetTimer } = useTimer(
+    sessionConfig[activeTab]
+  );
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
@@ -27,7 +29,14 @@ export const AppContainer = () => {
       <main className={`container t-center`}>
         <TabSelector activeTab={activeTab} onTabChange={handleTabChange} />
         <Timer time={time} />
-        <TimerControls isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />
+        <TimerControls
+          isPaused={isPaused}
+          isRunning={isRunning}
+          pauseTimer={pauseTimer}
+          resetTimer={resetTimer}
+          startTimer={startTimer}
+          stopTimer={stopTimer}
+        />
       </main>
     </>
   );

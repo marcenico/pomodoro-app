@@ -1,32 +1,37 @@
-.container {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
 .btn {
-  border-radius: 0.25rem;
+  border-radius: 50%;
+  border: none;
   cursor: pointer;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
 }
 
 .btnStart {
-  background-color: var(--primary-color);
-  border: none;
-  color: var(--white-color);
+  background-color: var(--blue-500);
+  height: 6.25rem;
+  transition: background-color var(--transition-normal);
+  width: 6.25rem;
+}
+
+.btnStartIcon {
+  width: 4.5rem;
+  height: 4.5rem;
 }
 
 .btnStart:hover {
-  background-color: var(--primary-color-hover);
+  background-color: var(--blue-600);
 }
 
 .btnReset {
-  background-color: var(--danger-color);
-  border: none;
-  color: var(--white-color);
+  background-color: var(--blue-100);
+  height: 3.125rem;
+  transition: background-color var(--transition-normal);
+  width: 3.125rem;
+}
+
+.btnResetIcon {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .btnReset:hover {
-  background-color: var(--danger-color-hover);
+  background-color: var(--blue-200);
 }
