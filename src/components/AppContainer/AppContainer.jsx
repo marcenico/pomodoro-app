@@ -26,17 +26,19 @@ export const AppContainer = () => {
   return (
     <>
       <Header />
-      <main className={`container t-center`}>
-        <TabSelector activeTab={activeTab} onTabChange={handleTabChange} />
-        <Timer time={time} />
-        <TimerControls
-          isPaused={isPaused}
-          isRunning={isRunning}
-          pauseTimer={pauseTimer}
-          resetTimer={resetTimer}
-          startTimer={startTimer}
-          stopTimer={stopTimer}
-        />
+      <main className={`container`}>
+        <div className={`d-flex f-col gap-12 t-center`}>
+          <TabSelector activeTab={activeTab} onTabChange={handleTabChange} />
+          <Timer time={time} />
+          <TimerControls
+            isPaused={isPaused}
+            isRunning={isRunning}
+            pauseTimer={pauseTimer}
+            resetTimer={resetTimer}
+            startTimer={startTimer}
+            stopTimer={stopTimer}
+          />
+        </div>
       </main>
     </>
   );
