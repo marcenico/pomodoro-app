@@ -40,33 +40,18 @@ export const useTimer = ({
 
   // Función para manejar la transición de ciclos
   const handleCycleTransition = (currentCycle, completedPomodoros) => {
-    if (currentCycle === 'pomodoro') {
-      // Después de un pomodoro, ir a descanso corto
-      return {
-        nextCycle: 'shortBreak',
-        newCompletedPomodoros: completedPomodoros + 1
-      };
-    } else if (currentCycle === 'shortBreak') {
-      // Después de un descanso corto, verificar si es hora del descanso largo
-      if (completedPomodoros >= 4) {
-        return {
-          nextCycle: 'longBreak',
-          newCompletedPomodoros: 0 // Resetear contador después del descanso largo
-        };
-      } else {
-        return {
-          nextCycle: 'pomodoro',
-          newCompletedPomodoros: completedPomodoros
-        };
-      }
-    } else if (currentCycle === 'longBreak') {
-      // Después de un descanso largo, volver a pomodoro
-      return {
-        nextCycle: 'pomodoro',
-        newCompletedPomodoros: 0
-      };
+    switch (currentCycle) {
+      case 'pomodoro':
+        return completedPomodoros >= 3
+          ? { nextCycle: 'longBreak', newCompletedPomodoros: 0 }
+          : { nextCycle: 'shortBreak', newCompletedPomodoros: completedPomodoros + 1 };
+      case 'shortBreak':
+        return { nextCycle: 'pomodoro', newCompletedPomodoros: completedPomodoros };
+      case 'longBreak':
+        return { nextCycle: 'pomodoro', newCompletedPomodoros: completedPomodoros };
+      default:
+        return { nextCycle: 'pomodoro', newCompletedPomodoros: completedPomodoros };
     }
-    return { nextCycle: 'pomodoro', newCompletedPomodoros: 0 };
   };
 
   useEffect(() => {
