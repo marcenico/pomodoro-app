@@ -97,8 +97,16 @@ export const useTimer = ({
   const startTimer = () => setStorage({ ...storedValue, isPaused: false, isRunning: true });
   const pauseTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: true });
   const stopTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: false });
-  const refreshTimer = () => setStorage({ ...defaultValue, isPaused: false, isRunning: true });
-  const resetTimer = () => setStorage({ ...defaultValue });
+  const refreshTimer = () => {
+    const currentCycle = storedValue.currentCycle || 'pomodoro';
+    const newTime = getCycleConfig(currentCycle);
+    setStorage({ ...storedValue, time: newTime, isPaused: false, isRunning: true });
+  };
+  const resetTimer = () => {
+    const currentCycle = storedValue.currentCycle || 'pomodoro';
+    const newTime = getCycleConfig(currentCycle);
+    setStorage({ ...storedValue, time: newTime, isPaused: true, isRunning: false });
+  };
   const changeCycle = (newCycle) => {
     const newTime = getCycleConfig(newCycle);
     setStorage({
