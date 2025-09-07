@@ -17,8 +17,7 @@ export const AppContainer = () => {
 
   // Convertir la configuración a formato de minutos y segundos
   const getTimerConfig = (tab) => {
-    const minutes = sessionConfig[tab] || 25;
-    return { minutes, seconds: 0 };
+    return sessionConfig[tab] || { minutes: 25, seconds: 0 };
   };
 
   const {
@@ -34,9 +33,9 @@ export const AppContainer = () => {
     completedPomodoros
   } = useTimer({
     ...getTimerConfig(activeTab),
-    pomodoroTime: sessionConfig.pomodoro,
-    shortBreakTime: sessionConfig.shortBreak,
-    longBreakTime: sessionConfig.longBreak
+    pomodoroTime: sessionConfig.pomodoro.minutes,
+    shortBreakTime: sessionConfig.shortBreak.minutes,
+    longBreakTime: sessionConfig.longBreak.minutes
   });
 
   // Sincronizar el tab activo con el ciclo actual del timer solo en transiciones automáticas
