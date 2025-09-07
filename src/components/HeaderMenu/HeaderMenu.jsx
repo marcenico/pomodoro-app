@@ -4,10 +4,7 @@ import { SessionOption } from './SessionOption';
 
 export const HeaderMenu = ({ isOpen, sessionOptions, selectedSession, onSessionChange }) => {
   if (!isOpen) return null;
-
-  const handleSessionSelect = (sessionId) => {
-    onSessionChange(sessionId);
-  };
+  const handleSessionSelect = (sessionId) => onSessionChange(sessionId);
 
   return (
     <div className={`${sessionsMenu} d-flex f-col gap-12 p-16`}>

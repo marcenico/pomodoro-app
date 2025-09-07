@@ -4,10 +4,7 @@ import { header, settingsButton, settingsIcon } from './Header.module.css';
 
 export const Header = ({ onSessionChange, selectedSession, sessionOptions }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <header className={`${header} d-flex jc-between ai-center`}>
