@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { tabContainer, tabIndicator, tabItem, tabItemActive } from './TabSelector.module.css';
 
-export const TabSelector = ({ activeTab, onTabChange }) => {
-  const tabs = [
-    { id: 'pomodoro', label: 'Pomodoro' },
-    { id: 'short-break', label: 'Short break' },
-    { id: 'long-break', label: 'Long break' }
-  ];
+const tabs = [
+  { id: 'pomodoro', label: 'Pomodoro' },
+  { id: 'short-break', label: 'Short break' },
+  { id: 'long-break', label: 'Long break' }
+];
 
+export const TabSelector = ({ activeTab, onTabChange }) => {
   const containerRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
@@ -19,7 +19,7 @@ export const TabSelector = ({ activeTab, onTabChange }) => {
     const tabWidth = containerWidth / tabs.length;
     const leftPosition = tabWidth * activeIndex + tabWidth / 2;
     setIndicatorStyle({ left: `${leftPosition}px` });
-  }, [activeTab, tabs]);
+  }, [activeTab]);
 
   return (
     <div ref={containerRef} className={`d-flex ai-center gap-12 p-12 ${tabContainer}`}>
