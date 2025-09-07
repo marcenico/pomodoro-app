@@ -4,7 +4,7 @@ import { Timer } from '@components/Timer/Timer';
 import { TimerControls } from '@components/TimerControls/TimerControls';
 import { sessionOptions } from '@data/sessionOptions';
 import { useTimer } from '@hooks/useTimer';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const AppContainer = () => {
   const [activeTab, setActiveTab] = useState('pomodoro');
@@ -33,9 +33,9 @@ export const AppContainer = () => {
     completedPomodoros
   } = useTimer({
     ...getTimerConfig(activeTab),
-    pomodoroTime: sessionConfig.pomodoro.minutes,
-    shortBreakTime: sessionConfig.shortBreak.minutes,
-    longBreakTime: sessionConfig.longBreak.minutes
+    pomodoroConfig: sessionConfig.pomodoro,
+    shortBreakConfig: sessionConfig.shortBreak,
+    longBreakConfig: sessionConfig.longBreak
   });
 
   // Sincronizar el tab activo con el ciclo actual del timer solo en transiciones automáticas

@@ -4,9 +4,9 @@ import { useLocalStorage } from './useLocalStorage';
 export const useTimer = ({
   minutes: initMinutes = 25,
   seconds: initSeconds = 0,
-  pomodoroTime = 25,
-  shortBreakTime = 5,
-  longBreakTime = 15
+  pomodoroConfig = { minutes: 25, seconds: 0 },
+  shortBreakConfig = { minutes: 5, seconds: 0 },
+  longBreakConfig = { minutes: 15, seconds: 0 }
 } = {}) => {
   const defaultValue = {
     time: { minutes: initMinutes, seconds: initSeconds },
@@ -25,16 +25,16 @@ export const useTimer = ({
   };
 
   // Función para obtener la configuración de tiempo según el ciclo actual
-  const getCycleConfig = (cycle, pomodoroTime, shortBreakTime, longBreakTime) => {
+  const getCycleConfig = (cycle) => {
     switch (cycle) {
       case 'pomodoro':
-        return { minutes: pomodoroTime, seconds: 0 };
+        return pomodoroConfig;
       case 'shortBreak':
-        return { minutes: shortBreakTime, seconds: 0 };
+        return shortBreakConfig;
       case 'longBreak':
-        return { minutes: longBreakTime, seconds: 0 };
+        return longBreakConfig;
       default:
-        return { minutes: pomodoroTime, seconds: 0 };
+        return pomodoroConfig;
     }
   };
 
@@ -70,7 +70,7 @@ export const useTimer = ({
 
         // Manejar transición de ciclo automáticamente
         const { nextCycle, newCompletedPomodoros } = handleCycleTransition(currentCycle, completedPomodoros);
-        const newTime = getCycleConfig(nextCycle, pomodoroTime, shortBreakTime, longBreakTime);
+        const newTime = getCycleConfig(nextCycle);
 
         setStorage({
           time: newTime,
@@ -92,7 +92,7 @@ export const useTimer = ({
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [storedValue, pomodoroTime, shortBreakTime, longBreakTime]);
+  }, [storedValue, pomodoroConfig, shortBreakConfig, longBreakConfig]);
 
   const startTimer = () => setStorage({ ...storedValue, isPaused: false, isRunning: true });
   const pauseTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: true });

@@ -14,9 +14,9 @@ export const sessionOptions = [
     name: 'Classic Pomodoro',
     times: '25min 5min 15min',
     config: {
-      pomodoro: { minutes: 25, seconds: 0 },
-      shortBreak: { minutes: 5, seconds: 0 },
-      longBreak: { minutes: 15, seconds: 0 }
+      pomodoro: { minutes: 0, seconds: 4 },
+      shortBreak: { minutes: 0, seconds: 2 },
+      longBreak: { minutes: 0, seconds: 4 }
     }
   },
   {
