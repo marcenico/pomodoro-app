@@ -1,22 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { sessionsGrid, sessionsMenu } from './HeaderMenu.module.css';
 import { SessionOption } from './SessionOption';
 
-export const HeaderMenu = ({ isOpen }) => {
-  const [sessionOptions, setSessionOptions] = useState([
-    { id: 'light-focus', name: 'Light Focus', times: '15min 5min 10min', isSelected: false },
-    { id: 'classic-pomodoro', name: 'Classic Pomodoro', times: '25min 5min 15min', isSelected: true },
-    { id: 'deep-work', name: 'Deep Work', times: '40min 10min 20min', isSelected: false },
-    { id: 'full-sprint', name: 'Full Sprint', times: '60min 12min 25min', isSelected: false }
-  ]);
-
+export const HeaderMenu = ({ isOpen, sessionOptions, selectedSession, onSessionChange }) => {
   if (!isOpen) return null;
 
   const handleSessionSelect = (sessionId) => {
-    sessionOptions.forEach((session) => {
-      session.isSelected = session.id === sessionId;
-      setSessionOptions([...sessionOptions]);
-    });
+    onSessionChange(sessionId);
   };
 
   return (
@@ -28,7 +18,7 @@ export const HeaderMenu = ({ isOpen }) => {
             key={session.id}
             name={session.name}
             times={session.times}
-            isSelected={session.isSelected}
+            isSelected={session.id === selectedSession}
             onClick={() => handleSessionSelect(session.id)}
           />
         ))}

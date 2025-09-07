@@ -3,8 +3,8 @@ import { tabContainer, tabIndicator, tabItem, tabItemActive } from './TabSelecto
 
 const tabs = [
   { id: 'pomodoro', label: 'Pomodoro' },
-  { id: 'short-break', label: 'Short break' },
-  { id: 'long-break', label: 'Long break' }
+  { id: 'shortBreak', label: 'Short break' },
+  { id: 'longBreak', label: 'Long break' }
 ];
 
 export const TabSelector = ({ activeTab, onTabChange }) => {
