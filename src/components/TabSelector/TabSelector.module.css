@@ -1,6 +1,19 @@
 .tabContainer {
   background: var(--blue-50);
   border-radius: 12px;
+  position: relative;
+}
+
+.tabIndicator {
+  background: var(--blue-500);
+  border-radius: 4px;
+  bottom: 0px;
+  height: 0.25rem;
+  margin-bottom: 0.75rem;
+  position: absolute;
+  transform: translateX(-50%);
+  transition: all var(--transition-normal);
+  width: 1.25rem;
 }
 
 .tabItem {
@@ -9,37 +22,22 @@
   border: none;
   box-sizing: content-box;
   cursor: pointer;
-  flex: 1;
-  font-weight: var(--text-medium);
   height: 2rem;
   position: relative;
-  text-align: center;
+  transition: all var(--transition-normal);
 }
 
 .tabItem:hover {
-  background: var(--blue-100);
   transform: translateY(-1px);
 }
 
 .tabItem:focus,
 .tabItem:active {
-  background: var(--blue-100);
+  font-weight: var(--text-bold);
   outline: unset;
   transform: translateY(-1px);
 }
 
 .tabItemActive {
   font-weight: var(--text-bold);
-}
-
-.tabItemActive::after {
-  background: var(--blue-500);
-  border-radius: 4px;
-  bottom: 0px;
-  content: '';
-  height: 4px;
-  left: 50%;
-  position: absolute;
-  transform: translateX(-50%);
-  width: 20px;
 }

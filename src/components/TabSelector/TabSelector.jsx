@@ -1,5 +1,5 @@
-import React from 'react';
-import { tabContainer, tabItem, tabItemActive } from './TabSelector.module.css';
+import React, { useEffect, useRef, useState } from 'react';
+import { tabContainer, tabIndicator, tabItem, tabItemActive } from './TabSelector.module.css';
 
 export const TabSelector = ({ activeTab, onTabChange }) => {
   const tabs = [
@@ -8,16 +8,31 @@ export const TabSelector = ({ activeTab, onTabChange }) => {
     { id: 'long-break', label: 'Long break' }
   ];
 
+  const containerRef = useRef(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({});
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
+    const containerWidth = containerRef.current.offsetWidth;
+    const tabWidth = containerWidth / tabs.length;
+    const leftPosition = tabWidth * activeIndex + tabWidth / 2;
+    setIndicatorStyle({ left: `${leftPosition}px` });
+  }, [activeTab, tabs]);
+
   return (
-    <div className={`${tabContainer} d-flex ai-center gap-12 p-12`}>
+    <div ref={containerRef} className={`d-flex ai-center gap-12 p-12 ${tabContainer}`}>
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          className={`${tabItem} ${activeTab === tab.id ? tabItemActive : ''} t-md t-950`}
+          className={`f-1 t-md t-950 t-center t-medium ${tabItem} ${activeTab === tab.id && tabItemActive}`}
+          type="button"
           onClick={() => onTabChange(tab.id)}>
           {tab.label}
         </button>
       ))}
+      <div className={tabIndicator} style={indicatorStyle} />
     </div>
   );
 };
