@@ -4,6 +4,11 @@
   cursor: pointer;
 }
 
+.btn:focus,
+.btn:active {
+  outline: unset;
+}
+
 .btnStart {
   background-color: var(--blue-500);
   height: 6.25rem;
@@ -12,16 +17,18 @@
   z-index: 10;
 }
 
+.btnStart:hover,
+.btnStart:focus,
+.btnStart:active {
+  background-color: var(--blue-600);
+}
+
 .btnStartIcon {
   width: 4.5rem;
   height: 4.5rem;
 }
 
-.btnStart:hover {
-  background-color: var(--blue-600);
-}
-
-.btnReset {
+.btnRefresh {
   background-color: var(--blue-100);
   height: 3.125rem;
   transition: all var(--transition-normal);
@@ -30,37 +37,39 @@
   opacity: 1;
 }
 
-.btnResetEnter {
-  animation: slideInFromCenter var(--transition-slow);
+.btnRefresh:hover,
+.btnRefresh:focus,
+.btnRefresh:active {
+  background-color: var(--blue-200);
 }
 
-.btnResetExit {
-  animation: slideOutToCenter var(--transition-slow);
-}
-
-.btnResetLeft {
-  animation: slideInFromLeft var(--transition-slow);
-}
-
-.btnResetRight {
-  animation: slideInFromRight var(--transition-slow);
-}
-
-.btnResetLeftExit {
-  animation: slideOutToLeft var(--transition-slow);
-}
-
-.btnResetRightExit {
-  animation: slideOutToRight var(--transition-slow);
-}
-
-.btnResetIcon {
+.btnRefreshIcon {
   width: 1.5rem;
   height: 1.5rem;
 }
 
-.btnReset:hover {
-  background-color: var(--blue-200);
+.btnRefreshEnter {
+  animation: slideInFromCenter var(--transition-slow);
+}
+
+.btnRefreshExit {
+  animation: slideOutToCenter var(--transition-slow);
+}
+
+.btnRefreshLeft {
+  animation: slideInFromLeft var(--transition-slow);
+}
+
+.btnRefreshRight {
+  animation: slideInFromRight var(--transition-slow);
+}
+
+.btnRefreshLeftExit {
+  animation: slideOutToLeft var(--transition-slow);
+}
+
+.btnRefreshRightExit {
+  animation: slideOutToRight var(--transition-slow);
 }
 
 @keyframes slideInFromLeft {

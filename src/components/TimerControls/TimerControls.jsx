@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import {
   btn,
-  btnReset,
-  btnResetIcon,
-  btnResetLeft,
-  btnResetLeftExit,
-  btnResetRight,
-  btnResetRightExit,
+  btnRefresh,
+  btnRefreshIcon,
+  btnRefreshLeft,
+  btnRefreshLeftExit,
+  btnRefreshRight,
+  btnRefreshRightExit,
   btnStart,
   btnStartIcon
 } from './TimerControls.module.css';
@@ -39,12 +39,15 @@ export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, i
     <section className={`d-flex ai-center jc-center gap-24`}>
       {showButtons && (
         <button
-          className={`d-flex ai-center jc-center t-600 ${btn} ${btnReset} ${
-            isAnimating && isRunning ? btnResetLeft : ''
-          } ${isAnimating && !isRunning ? btnResetLeftExit : ''}`}
-          onClick={resetTimer}>
+          className={`d-flex ai-center jc-center t-600 ${btn} ${btnRefresh} ${
+            isAnimating && isRunning ? btnRefreshLeft : ''
+          } ${isAnimating && !isRunning ? btnRefreshLeftExit : ''}`}
+          onClick={(e) => {
+            resetTimer();
+            e.preventDefault();
+          }}>
           <svg
-            className={btnResetIcon}
+            className={btnRefreshIcon}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -69,12 +72,16 @@ export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, i
       </button>
       {showButtons && (
         <button
-          className={`d-flex ai-center jc-center t-600 ${btn} ${btnReset} ${
-            isAnimating && isRunning ? btnResetRight : ''
-          } ${isAnimating && !isRunning ? btnResetRightExit : ''}`}
-          onClick={stopTimer}>
+          className={`d-flex ai-center jc-center t-600 ${btn} ${btnRefresh} ${
+            isAnimating && isRunning ? btnRefreshRight : ''
+          } ${isAnimating && !isRunning ? btnRefreshRightExit : ''}`}
+          onClick={(e) => {
+            stopTimer();
+            resetTimer();
+            e.preventDefault();
+          }}>
           <svg
-            className={btnResetIcon}
+            className={btnRefreshIcon}
             width="24"
             height="24"
             viewBox="0 0 24 24"
