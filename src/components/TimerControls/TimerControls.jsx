@@ -1,15 +1,48 @@
-import React from 'react';
-import { btn, btnReset, btnResetIcon, btnStart, btnStartIcon } from './TimerControls.module.css';
+import React, { useEffect, useState } from 'react';
+import {
+  btn,
+  btnReset,
+  btnResetIcon,
+  btnResetLeft,
+  btnResetLeftExit,
+  btnResetRight,
+  btnResetRightExit,
+  btnStart,
+  btnStartIcon
+} from './TimerControls.module.css';
 import pauseIcon from '/assets/pause.svg';
 import playIcon from '/assets/play.svg';
 import refreshIcon from '/assets/refresh.svg';
 import stopIcon from '/assets/stop.svg';
 
 export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, isPaused, isRunning }) => {
+  const [showButtons, setShowButtons] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    if (isRunning && !showButtons) {
+      // Mostrar botones con animación
+      setShowButtons(true);
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 300);
+    } else if (!isRunning && showButtons) {
+      // Ocultar botones con animación
+      setIsAnimating(true);
+      setTimeout(() => {
+        setShowButtons(false);
+        setIsAnimating(false);
+      }, 300);
+    }
+  }, [isRunning, showButtons]);
+
   return (
     <section className={`d-flex ai-center jc-center gap-24`}>
-      {isRunning && (
-        <button className={`d-flex ai-center jc-center t-600 ${btn} ${btnReset}`} onClick={resetTimer}>
+      {showButtons && (
+        <button
+          className={`d-flex ai-center jc-center t-600 ${btn} ${btnReset} ${
+            isAnimating && isRunning ? btnResetLeft : ''
+          } ${isAnimating && !isRunning ? btnResetLeftExit : ''}`}
+          onClick={resetTimer}>
           <svg
             className={btnResetIcon}
             width="24"
@@ -34,8 +67,12 @@ export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, i
           <use href={isPaused ? playIcon : pauseIcon} />
         </svg>
       </button>
-      {isRunning && (
-        <button className={`d-flex ai-center jc-center t-600 ${btn} ${btnReset}`} onClick={stopTimer}>
+      {showButtons && (
+        <button
+          className={`d-flex ai-center jc-center t-600 ${btn} ${btnReset} ${
+            isAnimating && isRunning ? btnResetRight : ''
+          } ${isAnimating && !isRunning ? btnResetRightExit : ''}`}
+          onClick={stopTimer}>
           <svg
             className={btnResetIcon}
             width="24"
