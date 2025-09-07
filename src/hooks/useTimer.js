@@ -99,6 +99,16 @@ export const useTimer = ({
   const stopTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: false });
   const refreshTimer = () => setStorage({ ...defaultValue, isPaused: false, isRunning: true });
   const resetTimer = () => setStorage({ ...defaultValue });
+  const changeCycle = (newCycle) => {
+    const newTime = getCycleConfig(newCycle);
+    setStorage({
+      ...storedValue,
+      currentCycle: newCycle,
+      time: newTime,
+      isPaused: true,
+      isRunning: false
+    });
+  };
 
-  return { ...storedValue, startTimer, pauseTimer, stopTimer, resetTimer, refreshTimer };
+  return { ...storedValue, startTimer, pauseTimer, stopTimer, resetTimer, refreshTimer, changeCycle };
 };

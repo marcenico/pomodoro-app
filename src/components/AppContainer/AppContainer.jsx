@@ -21,6 +21,8 @@ export const AppContainer = () => {
   };
 
   const {
+    changeCycle,
+    currentCycle,
     isPaused,
     isRunning,
     pauseTimer,
@@ -28,9 +30,7 @@ export const AppContainer = () => {
     resetTimer,
     startTimer,
     stopTimer,
-    time,
-    currentCycle,
-    completedPomodoros
+    time
   } = useTimer({
     ...getTimerConfig(activeTab),
     pomodoroConfig: sessionConfig.pomodoro,
@@ -53,7 +53,10 @@ export const AppContainer = () => {
     }
   }, [currentCycle]);
 
-  const handleTabChange = (tabId) => setActiveTab(tabId);
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+    changeCycle(tabId);
+  };
   const handleSessionChange = (sessionId) => setSelectedSession(sessionId);
 
   return (
