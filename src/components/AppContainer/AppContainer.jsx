@@ -30,7 +30,7 @@ export const AppContainer = () => {
   return (
     <>
       <Header sessionOptions={sessionOptions} selectedSession={selectedSession} onSessionChange={handleSessionChange} />
-      <main className={`container`}>
+      <main className={`container p-16`}>
         <div className={`d-flex f-col gap-12 t-center`}>
           <TabSelector activeTab={activeTab} onTabChange={handleTabChange} />
           <Timer time={time} />
