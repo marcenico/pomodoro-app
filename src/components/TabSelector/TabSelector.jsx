@@ -9,11 +9,11 @@ export const TabSelector = ({ activeTab, onTabChange }) => {
   ];
 
   return (
-    <div className={tabContainer}>
+    <div className={`${tabContainer} d-flex ai-center gap-12 p-12`}>
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          className={`${tabItem} ${activeTab === tab.id ? tabItemActive : ''}`}
+          className={`${tabItem} ${activeTab === tab.id ? tabItemActive : ''} t-md t-950`}
           onClick={() => onTabChange(tab.id)}>
           {tab.label}
         </button>
