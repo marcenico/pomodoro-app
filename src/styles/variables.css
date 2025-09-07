@@ -13,4 +13,5 @@
   --text-medium: 500;
   --text-bold: 700;
   --transition-normal: 0.3s ease;
+  --transition-slow: 0.4s ease;
 }
