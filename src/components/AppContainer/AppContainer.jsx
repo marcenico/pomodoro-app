@@ -1,22 +1,31 @@
 import { Header } from '@components/Header/Header';
+import { TabSelector } from '@components/TabSelector/TabSelector';
 import { Timer } from '@components/Timer/Timer';
 import { TimerControls } from '@components/TimerControls/TimerControls';
 import { useTimer } from '@hooks/useTimer';
-import React from 'react';
-
-// #region CSS MODULES
-// #endregion
+import React, { useState } from 'react';
 
 export const AppContainer = () => {
-  const { time, isPaused, startTimer, pauseTimer, resetTimer } = useTimer({
-    minutes: 25,
-    seconds: 0
-  });
+  const [activeTab, setActiveTab] = useState('pomodoro');
+
+  // Configuración de tiempos para cada tipo de sesión
+  const sessionConfig = {
+    pomodoro: { minutes: 25, seconds: 0 },
+    'short-break': { minutes: 5, seconds: 0 },
+    'long-break': { minutes: 15, seconds: 0 }
+  };
+
+  const { time, isPaused, startTimer, pauseTimer, resetTimer } = useTimer(sessionConfig[activeTab]);
+
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+  };
 
   return (
     <>
       <Header />
       <main className={`container t-center`}>
+        <TabSelector activeTab={activeTab} onTabChange={handleTabChange} />
         <Timer time={time} />
         <TimerControls isPaused={isPaused} pauseTimer={pauseTimer} resetTimer={resetTimer} startTimer={startTimer} />
       </main>
