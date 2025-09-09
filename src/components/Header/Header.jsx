@@ -1,10 +1,15 @@
 import { HeaderMenu } from '@components/HeaderMenu/HeaderMenu';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { header, settingsButton, settingsIcon } from './Header.module.css';
 
 export const Header = ({ onSessionChange, selectedSession, sessionOptions, isRunning }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Cerrar el menú cuando el timer esté corriendo
+  useEffect(() => {
+    if (isRunning && isMenuOpen) setIsMenuOpen(false);
+  }, [isRunning, isMenuOpen]);
 
   return (
     <header className={`${header} d-flex jc-between ai-center`}>
