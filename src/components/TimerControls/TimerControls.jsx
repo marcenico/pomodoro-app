@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   btn,
   btnRefresh,
@@ -14,6 +14,49 @@ import {
 export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, refreshTimer, isPaused, isRunning }) => {
   const [showButtons, setShowButtons] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  // Memoizar los handlers para evitar re-renders innecesarios
+  const handleRefreshClick = useCallback(
+    (e) => {
+      refreshTimer();
+      e.preventDefault();
+    },
+    [refreshTimer]
+  );
+
+  const handleStopClick = useCallback(
+    (e) => {
+      stopTimer();
+      resetTimer();
+      e.preventDefault();
+    },
+    [stopTimer, resetTimer]
+  );
+
+  const handleStartPauseClick = useCallback(() => {
+    if (isPaused) {
+      startTimer();
+    } else {
+      pauseTimer();
+    }
+  }, [isPaused, startTimer, pauseTimer]);
+
+  // Memoizar las clases CSS para los botones de refresh
+  const refreshButtonClasses = useMemo(() => {
+    const baseClasses = `d-flex ai-center jc-center t-600 ${btn} ${btnRefresh}`;
+    const animationClasses = isAnimating && isRunning ? btnRefreshLeft : '';
+    const exitClasses = isAnimating && !isRunning ? btnRefreshLeftExit : '';
+
+    return `${baseClasses} ${animationClasses} ${exitClasses}`.trim();
+  }, [isAnimating, isRunning, btn, btnRefresh, btnRefreshLeft, btnRefreshLeftExit]);
+
+  const refreshRightButtonClasses = useMemo(() => {
+    const baseClasses = `d-flex ai-center jc-center t-600 ${btn} ${btnRefresh}`;
+    const animationClasses = isAnimating && isRunning ? btnRefreshRight : '';
+    const exitClasses = isAnimating && !isRunning ? btnRefreshRightExit : '';
+
+    return `${baseClasses} ${animationClasses} ${exitClasses}`.trim();
+  }, [isAnimating, isRunning, btn, btnRefresh, btnRefreshRight, btnRefreshRightExit]);
 
   useEffect(() => {
     if (isRunning && !showButtons) {
@@ -34,14 +77,7 @@ export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, r
   return (
     <section className={`d-flex ai-center jc-center gap-24`}>
       {showButtons && (
-        <button
-          className={`d-flex ai-center jc-center t-600 ${btn} ${btnRefresh} ${
-            isAnimating && isRunning ? btnRefreshLeft : ''
-          } ${isAnimating && !isRunning ? btnRefreshLeftExit : ''}`}
-          onClick={(e) => {
-            refreshTimer();
-            e.preventDefault();
-          }}>
+        <button className={refreshButtonClasses} onClick={handleRefreshClick}>
           <svg
             className={btnRefreshIcon}
             width="24"
@@ -56,9 +92,7 @@ export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, r
           </svg>
         </button>
       )}
-      <button
-        className={`d-flex ai-center jc-center t-0 ${btn} ${btnStart}`}
-        onClick={isPaused ? startTimer : pauseTimer}>
+      <button className={`d-flex ai-center jc-center t-0 ${btn} ${btnStart}`} onClick={handleStartPauseClick}>
         {isPaused ? (
           <svg
             className={btnStartIcon}
@@ -82,15 +116,7 @@ export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, r
         )}
       </button>
       {showButtons && (
-        <button
-          className={`d-flex ai-center jc-center t-600 ${btn} ${btnRefresh} ${
-            isAnimating && isRunning ? btnRefreshRight : ''
-          } ${isAnimating && !isRunning ? btnRefreshRightExit : ''}`}
-          onClick={(e) => {
-            stopTimer();
-            resetTimer();
-            e.preventDefault();
-          }}>
+        <button className={refreshRightButtonClasses} onClick={handleStopClick}>
           <svg
             className={btnRefreshIcon}
             width="24"
