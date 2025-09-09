@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Git commit rules and templates
+.gitmessage
+COMMIT_RULES.md
