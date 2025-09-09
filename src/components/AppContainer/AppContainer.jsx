@@ -62,7 +62,12 @@ export const AppContainer = () => {
 
   return (
     <>
-      <Header sessionOptions={sessionOptions} selectedSession={selectedSession} onSessionChange={handleSessionChange} />
+      <Header
+        sessionOptions={sessionOptions}
+        selectedSession={selectedSession}
+        isRunning={isRunning}
+        onSessionChange={handleSessionChange}
+      />
       <main className={`container p-16`}>
         <div className={`d-flex f-col gap-12 t-center`}>
           <TabSelector activeTab={activeTab} isRunning={isRunning} onTabChange={handleTabChange} />

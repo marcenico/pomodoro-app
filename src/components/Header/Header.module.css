@@ -33,3 +33,8 @@
   width: 1.5rem; /* 24px */
   height: 1.5rem; /* 24px */
 }
+
+.settingsButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

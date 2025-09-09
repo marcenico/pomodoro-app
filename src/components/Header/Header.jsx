@@ -2,7 +2,7 @@ import { HeaderMenu } from '@components/HeaderMenu/HeaderMenu';
 import React, { useState } from 'react';
 import { header, settingsButton, settingsIcon } from './Header.module.css';
 
-export const Header = ({ onSessionChange, selectedSession, sessionOptions }) => {
+export const Header = ({ onSessionChange, selectedSession, sessionOptions, isRunning }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -12,6 +12,7 @@ export const Header = ({ onSessionChange, selectedSession, sessionOptions }) => 
       <button
         className={`${settingsButton} d-flex ai-center jc-center`}
         onClick={toggleMenu}
+        disabled={isRunning}
         aria-label="Abrir configuración de sesiones">
         <img className={settingsIcon} src="/assets/settings.svg" alt="Configuración" />
       </button>
