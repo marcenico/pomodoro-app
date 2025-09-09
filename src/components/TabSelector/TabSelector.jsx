@@ -7,7 +7,7 @@ const tabs = [
   { id: 'longBreak', label: 'Long break' }
 ];
 
-export const TabSelector = ({ activeTab, onTabChange }) => {
+export const TabSelector = ({ activeTab, isRunning, onTabChange }) => {
   const containerRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
@@ -27,6 +27,7 @@ export const TabSelector = ({ activeTab, onTabChange }) => {
         <button
           key={tab.id}
           className={`f-1 t-md t-950 t-center t-medium ${tabItem} ${activeTab === tab.id && tabItemActive}`}
+          disabled={isRunning && tab.id !== activeTab}
           type="button"
           onClick={() => onTabChange(tab.id)}>
           {tab.label}

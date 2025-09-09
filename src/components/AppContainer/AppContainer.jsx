@@ -54,6 +54,7 @@ export const AppContainer = () => {
   }, [currentCycle]);
 
   const handleTabChange = (tabId) => {
+    if (isRunning) return;
     setActiveTab(tabId);
     changeCycle(tabId);
   };
@@ -64,7 +65,7 @@ export const AppContainer = () => {
       <Header sessionOptions={sessionOptions} selectedSession={selectedSession} onSessionChange={handleSessionChange} />
       <main className={`container p-16`}>
         <div className={`d-flex f-col gap-12 t-center`}>
-          <TabSelector activeTab={activeTab} onTabChange={handleTabChange} />
+          <TabSelector activeTab={activeTab} isRunning={isRunning} onTabChange={handleTabChange} />
           <Timer time={time} />
           <TimerControls
             isPaused={isPaused}

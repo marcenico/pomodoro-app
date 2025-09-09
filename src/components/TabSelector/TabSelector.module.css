@@ -27,12 +27,17 @@
   transition: all var(--transition-normal);
 }
 
-.tabItem:hover {
+.tabItem:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.tabItem:hover:not(:disabled) {
   transform: translateY(-1px);
 }
 
-.tabItem:focus,
-.tabItem:active {
+.tabItem:focus:not(:disabled),
+.tabItem:active:not(:disabled) {
   font-weight: var(--text-bold);
   outline: unset;
   transform: translateY(-1px);
