@@ -4,6 +4,7 @@ import { Timer } from '@components/Timer/Timer';
 import { TimerControls } from '@components/TimerControls/TimerControls';
 import { sessionOptions } from '@data/sessionOptions';
 import { useTimer } from '@hooks/useTimer';
+import { useThemeCSS } from '@hooks/useTheme';
 import React, { useEffect, useState } from 'react';
 
 export const AppContainer = () => {
@@ -53,6 +54,9 @@ export const AppContainer = () => {
     }
   }, [currentCycle]);
 
+  // Aplicar tema CSS global
+  useThemeCSS(currentCycle);
+
   const handleTabChange = (tabId) => {
     if (isRunning) return;
     setActiveTab(tabId);
@@ -70,8 +74,13 @@ export const AppContainer = () => {
       />
       <main className={`container p-16`}>
         <div className={`d-flex f-col gap-12 t-center`}>
-          <TabSelector activeTab={activeTab} isRunning={isRunning} onTabChange={handleTabChange} />
-          <Timer time={time} />
+          <TabSelector
+            activeTab={activeTab}
+            isRunning={isRunning}
+            onTabChange={handleTabChange}
+            currentCycle={currentCycle}
+          />
+          <Timer time={time} currentCycle={currentCycle} />
           <TimerControls
             isPaused={isPaused}
             isRunning={isRunning}

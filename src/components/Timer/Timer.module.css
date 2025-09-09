@@ -2,4 +2,6 @@
   /* 112px / 100% */
   font-size: 7rem;
   line-height: 1;
+  color: var(--theme-text, var(--blue-950));
+  transition: color var(--transition-normal);
 }

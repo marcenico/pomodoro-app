@@ -7,6 +7,25 @@
   --blue-500: #4faeff;
   --blue-600: #1c5ba1;
   --blue-950: #1e3a5f;
+
+  --green-0: #f0fdf4;
+  --green-50: #dcfce7;
+  --green-100: #bbf7d0;
+  --green-200: #86efac;
+  --green-300: #4ade80;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --green-950: #14532d;
+
+  --dark-green-0: #ecfdf5;
+  --dark-green-50: #d1fae5;
+  --dark-green-100: #a7f3d0;
+  --dark-green-200: #6ee7b7;
+  --dark-green-300: #34d399;
+  --dark-green-500: #10b981;
+  --dark-green-600: #059669;
+  --dark-green-950: #064e3b;
+
   --font-family: 'Advent Pro', sans-serif, system-ui;
   --text-light: 300;
   --text-regular: 400;
