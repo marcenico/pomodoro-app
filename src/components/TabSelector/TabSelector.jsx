@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { tabContainer, tabIndicator, tabItem, tabItemActive } from './TabSelector.module.css';
 
 const tabs = [
@@ -11,7 +11,8 @@ export const TabSelector = ({ activeTab, isRunning, onTabChange }) => {
   const containerRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
-  const calculateIndicatorPosition = () => {
+  // Memoizar la función para calcular la posición del indicador
+  const calculateIndicatorPosition = useCallback(() => {
     if (!containerRef.current) return;
 
     const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
@@ -19,28 +20,44 @@ export const TabSelector = ({ activeTab, isRunning, onTabChange }) => {
     const tabWidth = containerWidth / tabs.length;
     const leftPosition = tabWidth * activeIndex + tabWidth / 2;
     setIndicatorStyle({ left: `${leftPosition}px` });
-  };
+  }, [activeTab]);
 
-  useEffect(() => calculateIndicatorPosition(), [activeTab]);
+  useEffect(() => calculateIndicatorPosition(), [calculateIndicatorPosition]);
   useEffect(() => {
     const handleResize = () => calculateIndicatorPosition();
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, [activeTab]);
+  }, [calculateIndicatorPosition]);
 
-  return (
-    <div ref={containerRef} className={`d-flex ai-center gap-12 p-12 ${tabContainer}`}>
-      {tabs.map((tab) => (
+  // Memoizar el handler de cambio de tab
+  const handleTabClick = useCallback(
+    (tabId) => {
+      if (isRunning && tabId !== activeTab) return;
+      onTabChange(tabId);
+    },
+    [isRunning, activeTab, onTabChange]
+  );
+
+  // Memoizar los tabs renderizados
+  const renderedTabs = useMemo(
+    () =>
+      tabs.map((tab) => (
         <button
           key={tab.id}
           className={`f-1 t-md t-950 t-center t-medium ${tabItem} ${activeTab === tab.id && tabItemActive}`}
           disabled={isRunning && tab.id !== activeTab}
           type="button"
-          onClick={() => onTabChange(tab.id)}>
+          onClick={() => handleTabClick(tab.id)}>
           {tab.label}
         </button>
-      ))}
+      )),
+    [activeTab, isRunning, handleTabClick, tabItem, tabItemActive]
+  );
+
+  return (
+    <div ref={containerRef} className={`d-flex ai-center gap-12 p-12 ${tabContainer}`}>
+      {renderedTabs}
       <div className={tabIndicator} style={indicatorStyle} />
     </div>
   );
