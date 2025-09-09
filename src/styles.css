@@ -35,8 +35,8 @@ html {
 }
 
 body {
-  background-color: var(--theme-bg, var(--blue-0));
-  color: var(--theme-text, var(--blue-950));
+  background-color: var(--color-0, var(--blue-0));
+  color: var(--color-950, var(--blue-950));
   font-family: var(--font-family);
   line-height: 1.6;
   min-height: 100vh;

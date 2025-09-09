@@ -2,7 +2,6 @@ import { Header } from '@components/Header/Header';
 import { TabSelector } from '@components/TabSelector/TabSelector';
 import { Timer } from '@components/Timer/Timer';
 import { TimerControls } from '@components/TimerControls/TimerControls';
-import { ThemeProvider } from '@contexts/ThemeContext';
 import { TimerProvider } from '@contexts/TimerContext';
 import { sessionOptions } from '@data/sessionOptions';
 import { useThemeCSS } from '@hooks/useTheme';
@@ -68,34 +67,32 @@ export const AppContainer = () => {
 
   return (
     <TimerProvider isRunning={isRunning}>
-      <ThemeProvider currentCycle={currentCycle}>
-        <Header
-          sessionOptions={sessionOptions}
-          selectedSession={selectedSession}
-          isRunning={isRunning}
-          onSessionChange={handleSessionChange}
-        />
-        <main className={`container p-16`}>
-          <div className={`d-flex f-col gap-12 t-center`}>
-            <TabSelector
-              activeTab={activeTab}
-              isRunning={isRunning}
-              onTabChange={handleTabChange}
-              currentCycle={currentCycle}
-            />
-            <Timer time={time} currentCycle={currentCycle} />
-            <TimerControls
-              isPaused={isPaused}
-              isRunning={isRunning}
-              pauseTimer={pauseTimer}
-              refreshTimer={refreshTimer}
-              resetTimer={resetTimer}
-              startTimer={startTimer}
-              stopTimer={stopTimer}
-            />
-          </div>
-        </main>
-      </ThemeProvider>
+      <Header
+        sessionOptions={sessionOptions}
+        selectedSession={selectedSession}
+        isRunning={isRunning}
+        onSessionChange={handleSessionChange}
+      />
+      <main className={`container p-16`}>
+        <div className={`d-flex f-col gap-12 t-center`}>
+          <TabSelector
+            activeTab={activeTab}
+            isRunning={isRunning}
+            onTabChange={handleTabChange}
+            currentCycle={currentCycle}
+          />
+          <Timer time={time} currentCycle={currentCycle} />
+          <TimerControls
+            isPaused={isPaused}
+            isRunning={isRunning}
+            pauseTimer={pauseTimer}
+            refreshTimer={refreshTimer}
+            resetTimer={resetTimer}
+            startTimer={startTimer}
+            stopTimer={stopTimer}
+          />
+        </div>
+      </main>
     </TimerProvider>
   );
 };

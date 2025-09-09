@@ -59,15 +59,15 @@
 }
 
 .t-950 {
-  color: var(--theme-text, var(--blue-950));
+  color: var(--color-950, var(--blue-950));
 }
 
 .t-600 {
-  color: var(--theme-text-secondary, var(--blue-600));
+  color: var(--color-600, var(--blue-600));
 }
 
 .t-500 {
-  color: var(--theme-accent, var(--blue-500));
+  color: var(--color-500, var(--blue-500));
 }
 
 .t-300 {
@@ -79,5 +79,5 @@
 }
 
 .t-0 {
-  color: var(--theme-bg, var(--blue-0));
+  color: var(--color-0, var(--blue-0));
 }

@@ -1,5 +1,5 @@
 .header {
-  border-bottom: 1px solid var(--theme-border, var(--blue-50));
+  border-bottom: 1px solid var(--color-50, var(--blue-50));
   height: 3.75rem;
   margin: 0 auto;
   max-width: 1168px;
@@ -13,7 +13,7 @@
   background: none;
   border-radius: 8px;
   border: none;
-  color: var(--theme-text, var(--blue-950));
+  color: var(--color-950, var(--blue-950));
   cursor: pointer;
   height: 2.75rem; /* 44px */
   padding: 0.5rem;
@@ -23,12 +23,12 @@
 
 .settingsButton:focus,
 .settingsButton:active {
-  outline: 1px solid var(--theme-accent-hover, var(--blue-600));
+  outline: 1px solid var(--color-600, var(--blue-600));
   outline-offset: 1px;
 }
 
 .settingsButton:hover {
-  background-color: var(--theme-light, var(--blue-50));
+  background-color: var(--color-50, var(--blue-50));
 }
 
 .settingsIcon {

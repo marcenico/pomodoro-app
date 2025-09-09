@@ -1,33 +1,33 @@
 .sessionOption {
-  background: var(--theme-bg, var(--blue-50));
+  background: var(--color-0, var(--blue-50));
   border-radius: 8px;
-  border: 1px solid var(--theme-border, var(--blue-200));
+  border: 1px solid var(--color-200, var(--blue-200));
   cursor: pointer;
   min-height: 60px;
   transition: all var(--transition-normal);
 }
 
 .sessionOption:hover {
-  border-color: var(--theme-border, var(--blue-200));
+  border-color: var(--color-200, var(--blue-200));
   transform: translateY(-1px);
 }
 
 .sessionOption:focus,
 .sessionOption:active {
-  outline: 1px solid var(--theme-text-secondary, var(--blue-600));
+  outline: 1px solid var(--color-600, var(--blue-600));
   outline-offset: 1px;
 }
 
 .sessionOption.selected {
-  background: var(--theme-accent, var(--blue-500));
-  border-color: var(--theme-accent, var(--blue-500));
-  color: var(--theme-bg, var(--blue-0));
+  background: var(--color-500, var(--blue-500));
+  border-color: var(--color-500, var(--blue-500));
+  color: var(--color-0, var(--blue-0));
 }
 
 .radioButton {
-  background: var(--theme-light, var(--blue-100));
+  background: var(--color-50, var(--blue-100));
   border-radius: 50%;
-  border: 1px solid var(--theme-text, var(--blue-950));
+  border: 1px solid var(--color-950, var(--blue-950));
   flex-shrink: 0;
   height: 1rem;
   transition: all var(--transition-normal);
@@ -36,17 +36,17 @@
 }
 
 .radioButton:hover {
-  background: var(--theme-light-hover, var(--blue-200));
-  border-color: var(--theme-text, var(--blue-950));
+  background: var(--color-100, var(--blue-200));
+  border-color: var(--color-950, var(--blue-950));
 }
 
 .radioButton.selected {
-  border-color: var(--theme-text, var(--blue-950));
-  background: var(--theme-bg, var(--blue-0));
+  border-color: var(--color-950, var(--blue-950));
+  background: var(--color-0, var(--blue-0));
 }
 
 .checkmark {
-  background: var(--theme-text-secondary, var(--blue-600));
+  background: var(--color-600, var(--blue-600));
   border-radius: 50%;
   bottom: 0;
   height: 0.5rem;
@@ -60,5 +60,5 @@
 
 .sessionOption.selected .sessionName,
 .sessionOption.selected .sessionTimes {
-  color: var(--theme-bg, var(--blue-0));
+  color: var(--color-0, var(--blue-0));
 }
