@@ -1,7 +1,7 @@
 .sessionOption {
   background: var(--theme-bg, var(--blue-50));
   border-radius: 8px;
-  border: 1px solid var(--blue-200);
+  border: 1px solid var(--theme-border, var(--blue-200));
   cursor: pointer;
   min-height: 60px;
   transition: all var(--transition-normal);
@@ -20,8 +20,8 @@
 
 .sessionOption.selected {
   background: var(--theme-accent, var(--blue-500));
-  border-color: var(--blue-500);
-  color: var(--blue-0);
+  border-color: var(--theme-accent, var(--blue-500));
+  color: var(--theme-bg, var(--blue-0));
 }
 
 .radioButton {
