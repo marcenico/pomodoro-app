@@ -11,7 +11,7 @@ export const TabSelector = ({ activeTab, isRunning, onTabChange }) => {
   const containerRef = useRef(null);
   const [indicatorStyle, setIndicatorStyle] = useState({});
 
-  useEffect(() => {
+  const calculateIndicatorPosition = () => {
     if (!containerRef.current) return;
 
     const activeIndex = tabs.findIndex((tab) => tab.id === activeTab);
@@ -19,6 +19,14 @@ export const TabSelector = ({ activeTab, isRunning, onTabChange }) => {
     const tabWidth = containerWidth / tabs.length;
     const leftPosition = tabWidth * activeIndex + tabWidth / 2;
     setIndicatorStyle({ left: `${leftPosition}px` });
+  };
+
+  useEffect(() => calculateIndicatorPosition(), [activeTab]);
+  useEffect(() => {
+    const handleResize = () => calculateIndicatorPosition();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
   }, [activeTab]);
 
   return (
