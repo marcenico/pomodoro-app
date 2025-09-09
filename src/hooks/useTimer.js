@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 
 export const useTimer = ({
@@ -94,23 +94,38 @@ export const useTimer = ({
     return () => clearInterval(intervalId);
   }, [storedValue, pomodoroConfig, shortBreakConfig, longBreakConfig]);
 
-  const startTimer = () => setStorage({ ...storedValue, isPaused: false, isRunning: true });
-  const pauseTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: true });
-  const stopTimer = () => setStorage({ ...storedValue, isPaused: true, isRunning: false });
-  const refreshTimer = () => {
+  // Memoizar las funciones de control del timer para evitar re-renders innecesarios
+  const startTimer = useCallback(() => {
+    setStorage({ ...storedValue, isPaused: false, isRunning: true });
+  }, [storedValue, setStorage]);
+
+  const pauseTimer = useCallback(() => {
+    setStorage({ ...storedValue, isPaused: true, isRunning: true });
+  }, [storedValue, setStorage]);
+
+  const stopTimer = useCallback(() => {
+    setStorage({ ...storedValue, isPaused: true, isRunning: false });
+  }, [storedValue, setStorage]);
+
+  const refreshTimer = useCallback(() => {
     const currentCycle = storedValue.currentCycle || 'pomodoro';
     const newTime = getCycleConfig(currentCycle);
     setStorage({ ...storedValue, time: newTime, isPaused: false, isRunning: true });
-  };
-  const resetTimer = () => {
+  }, [storedValue, getCycleConfig, setStorage]);
+
+  const resetTimer = useCallback(() => {
     const currentCycle = storedValue.currentCycle || 'pomodoro';
     const newTime = getCycleConfig(currentCycle);
     setStorage({ ...storedValue, time: newTime, isPaused: true, isRunning: false });
-  };
-  const changeCycle = (newCycle) => {
-    const newTime = getCycleConfig(newCycle);
-    setStorage({ ...storedValue, currentCycle: newCycle, time: newTime, isPaused: true, isRunning: false });
-  };
+  }, [storedValue, getCycleConfig, setStorage]);
+
+  const changeCycle = useCallback(
+    (newCycle) => {
+      const newTime = getCycleConfig(newCycle);
+      setStorage({ ...storedValue, currentCycle: newCycle, time: newTime, isPaused: true, isRunning: false });
+    },
+    [storedValue, getCycleConfig, setStorage]
+  );
 
   return { ...storedValue, startTimer, pauseTimer, stopTimer, resetTimer, refreshTimer, changeCycle };
 };
