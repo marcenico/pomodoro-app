@@ -1,10 +1,14 @@
 import { HeaderMenu } from '@components/HeaderMenu/HeaderMenu';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { header, settingsButton, settingsIcon } from './Header.module.css';
 
 export const Header = ({ onSessionChange, selectedSession, sessionOptions, isRunning }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Memoizar la función de toggle para evitar re-renders innecesarios
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
 
   // Cerrar el menú cuando el timer esté corriendo
   useEffect(() => {
