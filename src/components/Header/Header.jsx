@@ -14,7 +14,16 @@ export const Header = ({ onSessionChange, selectedSession, sessionOptions, isRun
         onClick={toggleMenu}
         disabled={isRunning}
         aria-label="Abrir configuración de sesiones">
-        <img className={settingsIcon} src="/assets/settings.svg" alt="Configuración" />
+        <svg
+          className={settingsIcon}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round">
+          <use href={`assets/settings.svg`} />
+        </svg>
       </button>
       <HeaderMenu
         isOpen={isMenuOpen}

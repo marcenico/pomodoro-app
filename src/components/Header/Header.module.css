@@ -13,6 +13,7 @@
   background: none;
   border-radius: 8px;
   border: none;
+  color: var(--theme-text, var(--blue-950));
   cursor: pointer;
   height: 2.75rem; /* 44px */
   padding: 0.5rem;
