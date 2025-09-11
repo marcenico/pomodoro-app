@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
+import { useNotifications } from './useNotifications';
 
 export const useTimer = ({
   minutes: initMinutes = 25,
@@ -16,6 +17,7 @@ export const useTimer = ({
     completedPomodoros: 0
   };
   const { storedValue, setStorage } = useLocalStorage('timerData', { ...defaultValue });
+  const { showSessionCompleteNotification } = useNotifications();
 
   const updateTimer = ({ minutes, seconds }) => {
     const newMinutes = seconds === 0 ? minutes - 1 : minutes;
@@ -68,6 +70,9 @@ export const useTimer = ({
       if (minutes === 0 && seconds === 0) {
         clearInterval(intervalId);
 
+        // Mostrar notificación de sesión completada
+        showSessionCompleteNotification(currentCycle, completedPomodoros + 1).catch(console.error);
+
         // Manejar transición de ciclo automáticamente
         const { nextCycle, newCompletedPomodoros } = handleCycleTransition(currentCycle, completedPomodoros);
         const newTime = getCycleConfig(nextCycle);
@@ -92,7 +97,7 @@ export const useTimer = ({
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [storedValue, pomodoroConfig, shortBreakConfig, longBreakConfig]);
+  }, [storedValue, pomodoroConfig, shortBreakConfig, longBreakConfig, showSessionCompleteNotification]);
 
   // Memoizar las funciones de control del timer para evitar re-renders innecesarios
   const startTimer = useCallback(() => {
