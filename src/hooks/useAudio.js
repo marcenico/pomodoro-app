@@ -21,10 +21,7 @@ export const useAudio = () => {
       if (!audioConfig.enabled) return;
 
       try {
-        // Inicializar audio si no está disponible
-        if (!audioContextRef.current) {
-          await initAudio();
-        }
+        if (!audioContextRef.current) await initAudio(); // Inicializar audio si no está disponible
 
         const audioContext = audioContextRef.current;
         if (!audioContext) {
@@ -33,12 +30,9 @@ export const useAudio = () => {
         }
 
         // Reanudar el contexto si está suspendido (importante para iOS)
-        if (audioContext.state === 'suspended') {
-          await audioContext.resume();
-        }
+        if (audioContext.state === 'suspended') await audioContext.resume();
 
         const config = audioConfig[cycleType] || audioConfig.pomodoro;
-
         config.frequencies.forEach((freq, index) => {
           setTimeout(() => {
             const oscillator = audioContext.createOscillator();
