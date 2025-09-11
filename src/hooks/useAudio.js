@@ -1,46 +1,73 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { audioConfig } from '@data/audioConfig';
 
 export const useAudio = () => {
+  const audioContextRef = useRef(null);
+
+  // Inicializar AudioContext al primer gesto del usuario
+  const initAudio = useCallback(async () => {
+    if (!audioContextRef.current) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      audioContextRef.current = new AudioCtx();
+    }
+
+    if (audioContextRef.current.state === 'suspended') {
+      await audioContextRef.current.resume();
+    }
+  }, []);
+
   /**
    * Plays a sound for session completion
    * @param {string} cycleType - Type of completed cycle ('pomodoro', 'shortBreak', 'longBreak')
    */
-  const playSessionCompleteSound = useCallback((cycleType) => {
-    if (!audioConfig.enabled) return;
+  const playSessionCompleteSound = useCallback(
+    async (cycleType) => {
+      if (!audioConfig.enabled) return;
 
-    try {
-      // Create audio context
-      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      try {
+        // Inicializar audio si no está disponible
+        if (!audioContextRef.current) {
+          await initAudio();
+        }
 
-      // Get audio configuration for the session type
-      const config = audioConfig[cycleType] || audioConfig.pomodoro;
+        const audioContext = audioContextRef.current;
+        if (!audioContext) {
+          console.warn('AudioContext not available');
+          return;
+        }
 
-      // Play chord sequence
-      config.frequencies.forEach((freq, index) => {
-        setTimeout(() => {
-          const oscillator = audioContext.createOscillator();
-          const gainNode = audioContext.createGain();
+        // Reanudar el contexto si está suspendido (importante para iOS)
+        if (audioContext.state === 'suspended') {
+          await audioContext.resume();
+        }
 
-          oscillator.connect(gainNode);
-          gainNode.connect(audioContext.destination);
+        const config = audioConfig[cycleType] || audioConfig.pomodoro;
 
-          oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
-          oscillator.type = 'sine';
+        config.frequencies.forEach((freq, index) => {
+          setTimeout(() => {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
 
-          // Envelope for smooth sound
-          gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-          gainNode.gain.linearRampToValueAtTime(config.volume, audioContext.currentTime + 0.01);
-          gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + config.duration);
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
 
-          oscillator.start(audioContext.currentTime);
-          oscillator.stop(audioContext.currentTime + config.duration);
-        }, index * config.delay);
-      });
-    } catch (error) {
-      console.warn('Could not play sound:', error);
-    }
-  }, []);
+            oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+            oscillator.type = 'sine';
 
-  return { playSessionCompleteSound };
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(config.volume, audioContext.currentTime + 0.01);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + config.duration);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + config.duration);
+          }, index * config.delay);
+        });
+      } catch (error) {
+        console.warn('Could not play sound:', error);
+      }
+    },
+    [initAudio]
+  );
+
+  return { initAudio, playSessionCompleteSound };
 };

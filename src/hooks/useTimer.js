@@ -1,13 +1,15 @@
 import { useCallback, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { useSessionComplete } from './useSessionComplete';
+import { useCycleLogic } from './useCycleLogic';
+import { useSessionNotifications } from './useSessionNotifications';
 
 export const useTimer = ({
   minutes: initMinutes = 25,
   seconds: initSeconds = 0,
   pomodoroConfig = { minutes: 25, seconds: 0 },
   shortBreakConfig = { minutes: 5, seconds: 0 },
-  longBreakConfig = { minutes: 15, seconds: 0 }
+  longBreakConfig = { minutes: 15, seconds: 0 },
+  playSessionCompleteSound
 } = {}) => {
   const defaultValue = {
     time: { minutes: initMinutes, seconds: initSeconds },
@@ -16,44 +18,22 @@ export const useTimer = ({
     currentCycle: 'pomodoro',
     completedPomodoros: 0
   };
-  const { storedValue, setStorage } = useLocalStorage('timerData', { ...defaultValue });
-  const { handleSessionComplete } = useSessionComplete();
 
+  const { storedValue, setStorage } = useLocalStorage('timerData', { ...defaultValue });
+  const { handleCycleTransition, getCycleConfig } = useCycleLogic();
+  const { handleSessionComplete } = useSessionNotifications();
+
+  const configs = { pomodoroConfig, shortBreakConfig, longBreakConfig };
+
+  /**
+   * Actualiza el tiempo del timer restando un segundo
+   * @param {Object} time - Objeto con minutes y seconds
+   * @returns {Object} - Nuevo tiempo actualizado
+   */
   const updateTimer = ({ minutes, seconds }) => {
     const newMinutes = seconds === 0 ? minutes - 1 : minutes;
     const newSeconds = seconds === 0 ? 59 : seconds - 1;
-    const newTime = { minutes: newMinutes, seconds: newSeconds };
-    return newTime;
-  };
-
-  // Función para obtener la configuración de tiempo según el ciclo actual
-  const getCycleConfig = (cycle) => {
-    switch (cycle) {
-      case 'pomodoro':
-        return pomodoroConfig;
-      case 'shortBreak':
-        return shortBreakConfig;
-      case 'longBreak':
-        return longBreakConfig;
-      default:
-        return pomodoroConfig;
-    }
-  };
-
-  // Función para manejar la transición de ciclos
-  const handleCycleTransition = (currentCycle, completedPomodoros) => {
-    switch (currentCycle) {
-      case 'pomodoro':
-        return completedPomodoros >= 3
-          ? { nextCycle: 'longBreak', newCompletedPomodoros: 0 }
-          : { nextCycle: 'shortBreak', newCompletedPomodoros: completedPomodoros + 1 };
-      case 'shortBreak':
-        return { nextCycle: 'pomodoro', newCompletedPomodoros: completedPomodoros };
-      case 'longBreak':
-        return { nextCycle: 'pomodoro', newCompletedPomodoros: completedPomodoros };
-      default:
-        return { nextCycle: 'pomodoro', newCompletedPomodoros: completedPomodoros };
-    }
+    return { minutes: newMinutes, seconds: newSeconds };
   };
 
   useEffect(() => {
@@ -71,11 +51,11 @@ export const useTimer = ({
         clearInterval(intervalId);
 
         // Manejar finalización completa de sesión (audio + notificación)
-        handleSessionComplete(currentCycle, completedPomodoros + 1).catch(console.error);
+        handleSessionComplete(currentCycle, completedPomodoros + 1, playSessionCompleteSound).catch(console.error);
 
         // Manejar transición de ciclo automáticamente
         const { nextCycle, newCompletedPomodoros } = handleCycleTransition(currentCycle, completedPomodoros);
-        const newTime = getCycleConfig(nextCycle);
+        const newTime = getCycleConfig(nextCycle, configs);
 
         setStorage({
           time: newTime,
@@ -97,7 +77,7 @@ export const useTimer = ({
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [storedValue, pomodoroConfig, shortBreakConfig, longBreakConfig, handleSessionComplete]);
+  }, [storedValue, handleSessionComplete, handleCycleTransition, getCycleConfig, configs]);
 
   // Memoizar las funciones de control del timer para evitar re-renders innecesarios
   const startTimer = useCallback(() => {
@@ -114,22 +94,22 @@ export const useTimer = ({
 
   const refreshTimer = useCallback(() => {
     const currentCycle = storedValue.currentCycle || 'pomodoro';
-    const newTime = getCycleConfig(currentCycle);
+    const newTime = getCycleConfig(currentCycle, configs);
     setStorage({ ...storedValue, time: newTime, isPaused: false, isRunning: true });
-  }, [storedValue, getCycleConfig, setStorage]);
+  }, [storedValue, getCycleConfig, configs, setStorage]);
 
   const resetTimer = useCallback(() => {
     const currentCycle = storedValue.currentCycle || 'pomodoro';
-    const newTime = getCycleConfig(currentCycle);
+    const newTime = getCycleConfig(currentCycle, configs);
     setStorage({ ...storedValue, time: newTime, isPaused: true, isRunning: false });
-  }, [storedValue, getCycleConfig, setStorage]);
+  }, [storedValue, getCycleConfig, configs, setStorage]);
 
   const changeCycle = useCallback(
     (newCycle) => {
-      const newTime = getCycleConfig(newCycle);
+      const newTime = getCycleConfig(newCycle, configs);
       setStorage({ ...storedValue, currentCycle: newCycle, time: newTime, isPaused: true, isRunning: false });
     },
-    [storedValue, getCycleConfig, setStorage]
+    [storedValue, getCycleConfig, configs, setStorage]
   );
 
   return { ...storedValue, startTimer, pauseTimer, stopTimer, resetTimer, refreshTimer, changeCycle };

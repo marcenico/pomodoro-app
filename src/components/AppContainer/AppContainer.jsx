@@ -4,6 +4,7 @@ import { Timer } from '@components/Timer/Timer';
 import { TimerControls } from '@components/TimerControls/TimerControls';
 import { TimerProvider } from '@contexts/TimerContext';
 import { sessionOptions } from '@data/sessionOptions';
+import { useAudio } from '@hooks/useAudio';
 import { useThemeCSS } from '@hooks/useTheme';
 import { useTimer } from '@hooks/useTimer';
 import React, { useEffect, useState } from 'react';
@@ -12,6 +13,9 @@ export const AppContainer = () => {
   const [activeTab, setActiveTab] = useState('pomodoro');
   const [selectedSession, setSelectedSession] = useState('classic-pomodoro');
   const [isAutoTransition, setIsAutoTransition] = useState(false);
+
+  // Inicializar audio
+  const { initAudio, playSessionCompleteSound } = useAudio();
 
   // Obtener la configuración de la sesión seleccionada
   const currentSession = sessionOptions.find((session) => session.id === selectedSession);
@@ -37,7 +41,8 @@ export const AppContainer = () => {
     ...getTimerConfig(activeTab),
     pomodoroConfig: sessionConfig.pomodoro,
     shortBreakConfig: sessionConfig.shortBreak,
-    longBreakConfig: sessionConfig.longBreak
+    longBreakConfig: sessionConfig.longBreak,
+    playSessionCompleteSound
   });
 
   // Sincronizar el tab activo con el ciclo actual del timer solo en transiciones automáticas
@@ -57,6 +62,12 @@ export const AppContainer = () => {
 
   // Aplicar tema CSS global
   useThemeCSS(currentCycle);
+
+  // Inicializar audio automáticamente en desktop
+  useEffect(() => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (!isMobile) initAudio(); // En desktop, inicializar audio automáticamente
+  }, [initAudio]);
 
   const handleTabChange = (tabId) => {
     if (isRunning) return;
@@ -90,6 +101,7 @@ export const AppContainer = () => {
             resetTimer={resetTimer}
             startTimer={startTimer}
             stopTimer={stopTimer}
+            initAudio={initAudio}
           />
         </div>
       </main>

@@ -11,7 +11,16 @@ import {
   btnStartIcon
 } from './TimerControls.module.css';
 
-export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, refreshTimer, isPaused, isRunning }) => {
+export const TimerControls = ({
+  startTimer,
+  resetTimer,
+  pauseTimer,
+  stopTimer,
+  refreshTimer,
+  isPaused,
+  isRunning,
+  initAudio
+}) => {
   const [showButtons, setShowButtons] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -34,12 +43,18 @@ export const TimerControls = ({ startTimer, resetTimer, pauseTimer, stopTimer, r
   );
 
   const handleStartPauseClick = useCallback(() => {
+    // Inicializar audio en el primer clic/tap solo en móviles (requerido para iOS)
+    if (initAudio) {
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      if (isMobile) initAudio();
+    }
+
     if (isPaused) {
       startTimer();
     } else {
       pauseTimer();
     }
-  }, [isPaused, startTimer, pauseTimer]);
+  }, [isPaused, startTimer, pauseTimer, initAudio]);
 
   // Memoizar las clases CSS para los botones de refresh
   const refreshButtonClasses = useMemo(() => {
