@@ -10,10 +10,6 @@ export const useAudio = () => {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       audioContextRef.current = new AudioCtx();
     }
-
-    if (audioContextRef.current.state === 'suspended') {
-      await audioContextRef.current.resume();
-    }
   }, []);
 
   /**
