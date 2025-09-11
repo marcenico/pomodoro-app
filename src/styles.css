@@ -13,15 +13,11 @@
 }
 
 html {
-  font-size: 12px;
+  font-size: 14px;
   scroll-behavior: smooth;
   transition: all var(--transition-normal);
 
   @media (width > 385px) {
-    font-size: 14px;
-  }
-
-  @media (width > 430px) {
     font-size: 16px;
   }
 
@@ -30,7 +26,7 @@ html {
   }
 
   @media (width > 1440px) {
-    font-size: 22px;
+    font-size: 20px;
   }
 }
 
