@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { audioConfig, audioSettings } from '@data/audioConfig';
+import { audioConfig } from '@data/audioConfig';
 
 export const useAudio = () => {
   /**
@@ -7,7 +7,7 @@ export const useAudio = () => {
    * @param {string} cycleType - Type of completed cycle ('pomodoro', 'shortBreak', 'longBreak')
    */
   const playSessionCompleteSound = useCallback((cycleType) => {
-    if (!audioSettings.enabled) return;
+    if (!audioConfig.enabled) return;
 
     try {
       // Create audio context
