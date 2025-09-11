@@ -8,14 +8,14 @@ export const audioConfig = {
   },
   shortBreak: {
     frequencies: [523.25, 659.25, 783.99], // C5, E5, G5 (C major chord)
-    duration: 0.5, // Duration of each note in seconds
-    delay: 100, // Delay between notes in milliseconds
-    volume: 0.2 // Volume level (0.0 to 1.0)
+    duration: 0.5,
+    delay: 100,
+    volume: 0.2
   },
   longBreak: {
     frequencies: [523.25, 659.25, 783.99, 1046.5], // C5, E5, G5, C6 (C major chord higher + octave)
     duration: 0.5,
     delay: 100,
-    volume: 0.25
+    volume: 0.2
   }
 };
