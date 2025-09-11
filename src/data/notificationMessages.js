@@ -5,7 +5,7 @@ export const notificationMessages = {
       `Great work! You've completed ${completedPomodoros} pomodoro(s). Time to take a break.`
   },
   shortBreak: {
-    title: '☕ Short Break Finished!',
+    title: '☕ Break Finished!',
     body: 'Break completed! Time to get back to work with renewed energy.'
   },
   longBreak: {
