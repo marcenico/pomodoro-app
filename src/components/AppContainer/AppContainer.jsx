@@ -5,6 +5,7 @@ import { TimerControls } from '@components/TimerControls/TimerControls';
 import { TimerProvider } from '@contexts/TimerContext';
 import { sessionOptions } from '@data/sessionOptions';
 import { useAudio } from '@hooks/useAudio';
+import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useThemeCSS } from '@hooks/useTheme';
 import { useTimer } from '@hooks/useTimer';
 import React, { useEffect, useState } from 'react';
@@ -62,6 +63,9 @@ export const AppContainer = () => {
 
   // Aplicar tema CSS global
   useThemeCSS(currentCycle);
+
+  // Actualizar el título del documento con el tiempo del timer
+  useDocumentTitle(time, currentCycle, isRunning, isPaused);
 
   // Inicializar audio automáticamente en desktop
   useEffect(() => {
