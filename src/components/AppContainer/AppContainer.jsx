@@ -13,7 +13,6 @@ import React, { useEffect, useState } from 'react';
 export const AppContainer = () => {
   const [activeTab, setActiveTab] = useState('pomodoro');
   const [selectedSession, setSelectedSession] = useState('classic-pomodoro');
-  const [isAutoTransition, setIsAutoTransition] = useState(false);
 
   // Inicializar audio
   const { initAudio, playSessionCompleteSound } = useAudio();
@@ -46,20 +45,12 @@ export const AppContainer = () => {
     playSessionCompleteSound
   });
 
-  // Sincronizar el tab activo con el ciclo actual del timer solo en transiciones automáticas
+  // Sincronizar el tab activo con el ciclo actual del timer automáticamente
   useEffect(() => {
-    if (isAutoTransition && currentCycle && currentCycle !== activeTab) {
+    if (currentCycle && currentCycle !== activeTab) {
       setActiveTab(currentCycle);
-      setIsAutoTransition(false);
     }
-  }, [currentCycle, activeTab, isAutoTransition]);
-
-  // Detectar cuando el timer hace una transición automática
-  useEffect(() => {
-    if (currentCycle) {
-      setIsAutoTransition(true);
-    }
-  }, [currentCycle]);
+  }, [currentCycle, activeTab]);
 
   // Aplicar tema CSS global
   useThemeCSS(currentCycle);

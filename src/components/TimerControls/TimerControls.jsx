@@ -21,7 +21,6 @@ export const TimerControls = ({
   isRunning,
   initAudio
 }) => {
-  const [showButtons, setShowButtons] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
   // Memoizar los handlers para evitar re-renders innecesarios
@@ -74,24 +73,17 @@ export const TimerControls = ({
   }, [isAnimating, isRunning, btn, btnRefresh, btnRefreshRight, btnRefreshRightExit]);
 
   useEffect(() => {
-    if (isRunning && !showButtons) {
+    console.log('isRunning', isRunning);
+    if (isRunning) {
       // Mostrar botones con animación
-      setShowButtons(true);
       setIsAnimating(true);
       setTimeout(() => setIsAnimating(false), 300);
-    } else if (!isRunning && showButtons) {
-      // Ocultar botones con animación
-      setIsAnimating(true);
-      setTimeout(() => {
-        setShowButtons(false);
-        setIsAnimating(false);
-      }, 300);
     }
-  }, [isRunning, showButtons]);
+  }, [isRunning]);
 
   return (
     <section className={`d-flex ai-center jc-center gap-24`}>
-      {showButtons && (
+      {isRunning && (
         <button className={refreshButtonClasses} onClick={handleRefreshClick}>
           <svg
             className={btnRefreshIcon}
@@ -130,7 +122,7 @@ export const TimerControls = ({
           </svg>
         )}
       </button>
-      {showButtons && (
+      {isRunning && (
         <button className={refreshRightButtonClasses} onClick={handleStopClick}>
           <svg
             className={btnRefreshIcon}
