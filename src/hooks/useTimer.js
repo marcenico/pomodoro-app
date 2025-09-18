@@ -1,7 +1,14 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { useCycleLogic } from './useCycleLogic';
 import { useSessionNotifications } from './useSessionNotifications';
+import {
+  calculateRemainingTime,
+  timeToMilliseconds,
+  createTimerEndState,
+  createTimerRunningState,
+  shouldUpdateTimer
+} from '../helpers/timerUtils';
 
 export const useTimer = ({
   minutes: initMinutes = 25,
@@ -24,32 +31,19 @@ export const useTimer = ({
   const { storedValue, setStorage } = useLocalStorage('timerData', { ...defaultValue });
   const { handleCycleTransition, getCycleConfig } = useCycleLogic();
   const { handleSessionComplete } = useSessionNotifications();
+  const intervalRef = useRef(null);
+  const lastUpdateRef = useRef(0);
 
   const configs = { pomodoroConfig, shortBreakConfig, longBreakConfig };
 
   /**
-   * Calcula el tiempo restante basándose en timestamps reales
-   * @param {number} startTime - Timestamp de inicio en ms
-   * @param {number} duration - Duración total en ms
-   * @returns {Object} - Tiempo restante en formato { minutes, seconds }
+   * Limpia el interval del timer
    */
-  const calculateRemainingTime = (startTime, duration) => {
-    const elapsed = Date.now() - startTime;
-    const remaining = Math.max(0, duration - elapsed);
-
-    const minutes = Math.floor(remaining / 60000);
-    const seconds = Math.floor((remaining % 60000) / 1000);
-
-    return { minutes, seconds };
-  };
-
-  /**
-   * Convierte tiempo en formato { minutes, seconds } a milisegundos
-   * @param {Object} time - Objeto con minutes y seconds
-   * @returns {number} - Tiempo en milisegundos
-   */
-  const timeToMilliseconds = ({ minutes, seconds }) => {
-    return (minutes * 60 + seconds) * 1000;
+  const clearTimerInterval = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
   };
 
   /**
@@ -89,44 +83,57 @@ export const useTimer = ({
     }
   }, [initMinutes, initSeconds]);
 
-  useEffect(() => {
-    if (storedValue.isPaused || !storedValue.startTime || !storedValue.duration) return;
+  useEffect(
+    () => {
+      if (storedValue.isPaused || !storedValue.startTime || !storedValue.duration) {
+        clearTimerInterval();
+        return;
+      }
 
-    const intervalId = setInterval(() => {
-      setStorage((prevState) => {
-        const { startTime, duration, currentCycle, completedPomodoros } = prevState;
-        const remainingTime = calculateRemainingTime(startTime, duration);
+      const updateTimer = () => {
+        const now = Date.now();
 
-        if (remainingTime.minutes === 0 && remainingTime.seconds === 0) {
-          // Manejar finalización completa de sesión (audio + notificación)
-          handleSessionComplete(currentCycle, completedPomodoros + 1, playSessionCompleteSound).catch(console.error);
+        // Actualizar cada 100ms
+        if (shouldUpdateTimer(now, lastUpdateRef.current)) {
+          setStorage((prevState) => {
+            const { startTime, duration, currentCycle, completedPomodoros } = prevState;
+            const remainingTime = calculateRemainingTime(startTime, duration);
 
-          // Manejar transición de ciclo automáticamente
-          return handleAutomaticCycleTransition(currentCycle, completedPomodoros);
-        } else {
-          return {
-            time: remainingTime,
-            isPaused: false,
-            isRunning: true,
-            currentCycle,
-            completedPomodoros,
-            startTime,
-            duration
-          };
+            if (remainingTime.minutes <= 0 && remainingTime.seconds <= 0) {
+              // Manejar finalización completa de sesión (audio + notificación)
+              handleSessionComplete(currentCycle, completedPomodoros + 1, playSessionCompleteSound).catch(
+                console.error
+              );
+
+              const newState = handleAutomaticCycleTransition(currentCycle, completedPomodoros);
+              setStorage(newState);
+
+              // Retornar estado de finalización usando utilidad
+              return createTimerEndState(currentCycle, completedPomodoros, startTime, duration);
+            } else {
+              // Retornar estado de ejecución usando utilidad
+              return createTimerRunningState(remainingTime, currentCycle, completedPomodoros, startTime, duration);
+            }
+          });
+          lastUpdateRef.current = now;
         }
-      });
-    }, 1000);
+      };
 
-    return () => clearInterval(intervalId);
-  }, [
-    storedValue.isPaused,
-    storedValue.startTime,
-    storedValue.duration,
-    handleSessionComplete,
-    handleCycleTransition,
-    getCycleConfig,
-    configs
-  ]);
+      // Usar setInterval con frecuencia más alta
+      intervalRef.current = setInterval(updateTimer, 100);
+      return () => clearTimerInterval();
+    },
+    [
+      storedValue.isPaused,
+      storedValue.startTime,
+      storedValue.duration,
+      handleSessionComplete,
+      handleCycleTransition,
+      getCycleConfig,
+      configs
+    ],
+    100
+  );
 
   // Memoizar las funciones de control del timer para evitar re-renders innecesarios
   const startTimer = useCallback(() => {
@@ -148,7 +155,7 @@ export const useTimer = ({
   }, [storedValue, setStorage]);
 
   const stopTimer = useCallback(() => {
-    setStorage({ ...storedValue, isPaused: true, isRunning: false });
+    setStorage({ ...storedValue, isPaused: true, isRunning: false, startTime: null, duration: null });
   }, [storedValue, setStorage]);
 
   const refreshTimer = useCallback(() => {
