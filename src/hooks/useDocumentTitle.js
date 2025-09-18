@@ -23,7 +23,5 @@ export const useDocumentTitle = (time, currentCycle, isRunning, isPaused) => {
     const emoji = cycleEmoji[currentCycle]; // Mapear el ciclo actual a un emoji descriptivo
     const message = messages[currentCycle]; // Obtener el mensaje del ciclo actual
     document.title = `${emoji} ${formattedTime} - ${message}`; // Crear el título del documento
-
-    return () => (document.title = defaultTitle); // Cleanup: restaurar el título original cuando el componente se desmonte
   }, [time, currentCycle, isRunning, isPaused]);
 };
