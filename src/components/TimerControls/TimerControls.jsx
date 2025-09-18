@@ -73,7 +73,6 @@ export const TimerControls = ({
   }, [isAnimating, isRunning, btn, btnRefresh, btnRefreshRight, btnRefreshRightExit]);
 
   useEffect(() => {
-    console.log('isRunning', isRunning);
     if (isRunning) {
       // Mostrar botones con animación
       setIsAnimating(true);
