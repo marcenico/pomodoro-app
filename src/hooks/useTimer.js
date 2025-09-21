@@ -32,7 +32,7 @@ export const useTimer = ({
   const { storedValue, setStorage } = useLocalStorage('timerData', { ...defaultValue });
   const { handleCycleTransition, getCycleConfig } = useCycleLogic();
   const { handleSessionComplete } = useSessionNotifications();
-  const { autoStart, toggleAutoStart, setAutoStartValue } = useAutoStart();
+  const { autoStartSettings, togglePomodoroAutoStart, toggleBreakAutoStart, getAutoStartForCycle } = useAutoStart();
   const intervalRef = useRef(null);
   const lastUpdateRef = useRef(0);
 
@@ -60,8 +60,10 @@ export const useTimer = ({
     const newDuration = timeToMilliseconds(newTime);
     const newStartTime = Date.now();
 
-    // Si el inicio automático está activado, iniciar el timer automáticamente
-    if (autoStart) {
+    // Verificar si el siguiente ciclo debe iniciar automáticamente
+    const shouldAutoStart = getAutoStartForCycle(nextCycle);
+
+    if (shouldAutoStart) {
       return {
         time: newTime,
         isPaused: false,
@@ -72,7 +74,7 @@ export const useTimer = ({
         duration: newDuration
       };
     } else {
-      // Si el inicio automático está desactivado, preparar el timer pero no iniciarlo
+      // Si el inicio automático está desactivado para este tipo de ciclo, preparar el timer pero no iniciarlo
       return {
         time: newTime,
         isPaused: true,
@@ -147,7 +149,7 @@ export const useTimer = ({
       handleCycleTransition,
       getCycleConfig,
       configs,
-      autoStart
+      getAutoStartForCycle
     ],
     100
   );
@@ -228,8 +230,8 @@ export const useTimer = ({
     resetTimer,
     refreshTimer,
     changeCycle,
-    autoStart,
-    toggleAutoStart,
-    setAutoStartValue
+    autoStartSettings,
+    togglePomodoroAutoStart,
+    toggleBreakAutoStart
   };
 };

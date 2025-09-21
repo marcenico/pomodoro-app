@@ -37,8 +37,9 @@ export const AppContainer = () => {
     startTimer,
     stopTimer,
     time,
-    autoStart,
-    toggleAutoStart
+    autoStartSettings,
+    togglePomodoroAutoStart,
+    toggleBreakAutoStart
   } = useTimer({
     ...getTimerConfig(activeTab),
     pomodoroConfig: sessionConfig.pomodoro,
@@ -80,8 +81,9 @@ export const AppContainer = () => {
         selectedSession={selectedSession}
         isRunning={isRunning}
         onSessionChange={handleSessionChange}
-        autoStart={autoStart}
-        onAutoStartToggle={toggleAutoStart}
+        autoStartSettings={autoStartSettings}
+        onPomodoroToggle={togglePomodoroAutoStart}
+        onBreakToggle={toggleBreakAutoStart}
       />
       <main className={`container p-16`}>
         <div className={`d-flex f-col gap-12 t-center`}>

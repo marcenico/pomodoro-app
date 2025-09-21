@@ -7,8 +7,9 @@ export const Header = ({
   selectedSession,
   sessionOptions,
   isRunning,
-  autoStart,
-  onAutoStartToggle
+  autoStartSettings,
+  onPomodoroToggle,
+  onBreakToggle
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -72,8 +73,9 @@ export const Header = ({
         sessionOptions={sessionOptions}
         selectedSession={selectedSession}
         onSessionChange={onSessionChange}
-        autoStart={autoStart}
-        onAutoStartToggle={onAutoStartToggle}
+        autoStartSettings={autoStartSettings}
+        onPomodoroToggle={onPomodoroToggle}
+        onBreakToggle={onBreakToggle}
         isRunning={isRunning}
       />
     </header>

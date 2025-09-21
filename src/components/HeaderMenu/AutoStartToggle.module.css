@@ -1,13 +1,16 @@
 .toggleContainer {
+  border-top: 1px solid var(--color-200);
+  padding-top: 0.75rem;
+}
+
+.toggleItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--color-200);
+  cursor: pointer;
 }
 
 .toggleLabel {
-  color: var(--color-950);
   cursor: pointer;
   user-select: none;
 }
@@ -45,7 +48,7 @@
   width: 1.125rem;
   left: 0.125rem;
   bottom: 0.125rem;
-  background-color: var(--color-300);
+  background-color: var(--color-500);
   border-radius: 50%;
   transition: var(--transition-normal);
 }

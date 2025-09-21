@@ -8,8 +8,9 @@ export const HeaderMenu = ({
   sessionOptions,
   selectedSession,
   onSessionChange,
-  autoStart,
-  onAutoStartToggle,
+  autoStartSettings,
+  onPomodoroToggle,
+  onBreakToggle,
   isRunning
 }) => {
   if (!isOpen) return null;
@@ -18,6 +19,7 @@ export const HeaderMenu = ({
   return (
     <div className={`${sessionsMenu} d-flex f-col gap-12 p-16`}>
       <h2 className={`t-lg t-bold t-950`}>Sessions settings</h2>
+
       <div className={`${sessionsGrid} gap-1`}>
         {sessionOptions.map((session) => (
           <SessionOption
@@ -29,7 +31,14 @@ export const HeaderMenu = ({
           />
         ))}
       </div>
-      <AutoStartToggle autoStart={autoStart} onToggle={onAutoStartToggle} disabled={isRunning} />
+
+      <AutoStartToggle
+        pomodoroAutoStart={autoStartSettings.pomodoro}
+        breakAutoStart={autoStartSettings.break}
+        onPomodoroToggle={onPomodoroToggle}
+        onBreakToggle={onBreakToggle}
+        disabled={isRunning}
+      />
     </div>
   );
 };
