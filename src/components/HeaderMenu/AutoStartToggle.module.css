@@ -73,5 +73,5 @@
 }
 
 .toggleSwitch input:focus + .toggleSlider {
-  box-shadow: 0 0 0 2px var(--color-200);
+  box-shadow: 0 0 0 1px var(--color-600);
 }
