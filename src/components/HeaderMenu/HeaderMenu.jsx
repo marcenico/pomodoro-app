@@ -1,8 +1,17 @@
 import React from 'react';
 import { sessionsGrid, sessionsMenu } from './HeaderMenu.module.css';
 import { SessionOption } from './SessionOption';
+import { AutoStartToggle } from './AutoStartToggle';
 
-export const HeaderMenu = ({ isOpen, sessionOptions, selectedSession, onSessionChange }) => {
+export const HeaderMenu = ({
+  isOpen,
+  sessionOptions,
+  selectedSession,
+  onSessionChange,
+  autoStart,
+  onAutoStartToggle,
+  isRunning
+}) => {
   if (!isOpen) return null;
   const handleSessionSelect = (sessionId) => onSessionChange(sessionId);
 
@@ -20,6 +29,7 @@ export const HeaderMenu = ({ isOpen, sessionOptions, selectedSession, onSessionC
           />
         ))}
       </div>
+      <AutoStartToggle autoStart={autoStart} onToggle={onAutoStartToggle} disabled={isRunning} />
     </div>
   );
 };

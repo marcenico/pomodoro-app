@@ -2,7 +2,14 @@ import { HeaderMenu } from '@components/HeaderMenu/HeaderMenu';
 import React, { useCallback, useEffect, useState } from 'react';
 import { header, settingsButton, settingsIcon } from './Header.module.css';
 
-export const Header = ({ onSessionChange, selectedSession, sessionOptions, isRunning }) => {
+export const Header = ({
+  onSessionChange,
+  selectedSession,
+  sessionOptions,
+  isRunning,
+  autoStart,
+  onAutoStartToggle
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Memoizar la función de toggle para evitar re-renders innecesarios
@@ -65,6 +72,9 @@ export const Header = ({ onSessionChange, selectedSession, sessionOptions, isRun
         sessionOptions={sessionOptions}
         selectedSession={selectedSession}
         onSessionChange={onSessionChange}
+        autoStart={autoStart}
+        onAutoStartToggle={onAutoStartToggle}
+        isRunning={isRunning}
       />
     </header>
   );

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { useCycleLogic } from './useCycleLogic';
 import { useSessionNotifications } from './useSessionNotifications';
+import { useAutoStart } from './useAutoStart';
 import {
   calculateRemainingTime,
   timeToMilliseconds,
@@ -31,6 +32,7 @@ export const useTimer = ({
   const { storedValue, setStorage } = useLocalStorage('timerData', { ...defaultValue });
   const { handleCycleTransition, getCycleConfig } = useCycleLogic();
   const { handleSessionComplete } = useSessionNotifications();
+  const { autoStart, toggleAutoStart, setAutoStartValue } = useAutoStart();
   const intervalRef = useRef(null);
   const lastUpdateRef = useRef(0);
 
@@ -58,15 +60,29 @@ export const useTimer = ({
     const newDuration = timeToMilliseconds(newTime);
     const newStartTime = Date.now();
 
-    return {
-      time: newTime,
-      isPaused: false,
-      isRunning: true,
-      currentCycle: nextCycle,
-      completedPomodoros: newCompletedPomodoros,
-      startTime: newStartTime,
-      duration: newDuration
-    };
+    // Si el inicio automático está activado, iniciar el timer automáticamente
+    if (autoStart) {
+      return {
+        time: newTime,
+        isPaused: false,
+        isRunning: true,
+        currentCycle: nextCycle,
+        completedPomodoros: newCompletedPomodoros,
+        startTime: newStartTime,
+        duration: newDuration
+      };
+    } else {
+      // Si el inicio automático está desactivado, preparar el timer pero no iniciarlo
+      return {
+        time: newTime,
+        isPaused: true,
+        isRunning: false,
+        currentCycle: nextCycle,
+        completedPomodoros: newCompletedPomodoros,
+        startTime: null,
+        duration: null
+      };
+    }
   };
 
   // Solo inicializar el timer si no hay un timer en ejecución
@@ -130,7 +146,8 @@ export const useTimer = ({
       handleSessionComplete,
       handleCycleTransition,
       getCycleConfig,
-      configs
+      configs,
+      autoStart
     ],
     100
   );
@@ -203,5 +220,16 @@ export const useTimer = ({
     [storedValue, getCycleConfig, configs, setStorage]
   );
 
-  return { ...storedValue, startTimer, pauseTimer, stopTimer, resetTimer, refreshTimer, changeCycle };
+  return {
+    ...storedValue,
+    startTimer,
+    pauseTimer,
+    stopTimer,
+    resetTimer,
+    refreshTimer,
+    changeCycle,
+    autoStart,
+    toggleAutoStart,
+    setAutoStartValue
+  };
 };
