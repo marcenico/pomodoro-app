@@ -1,0 +1,109 @@
+.customSessionContainer {
+  background: var(--color-0, var(--blue-50));
+  border-radius: 8px;
+  border: 2px solid var(--color-100, var(--blue-100));
+  transition: all var(--transition-normal);
+  position: relative;
+  user-select: none;
+}
+
+.customSessionContainer:hover:not(:disabled),
+.selected {
+  border-color: var(--color-500, var(--blue-500));
+}
+
+.sliderRow {
+  min-height: 2rem;
+}
+
+.sliderLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.sliderValue {
+  text-align: right;
+  background: var(--color-100, var(--blue-100));
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-200, var(--blue-200));
+}
+
+.rangeSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0.5rem;
+  border-radius: 4px;
+  background: var(--color-200, var(--blue-200));
+  outline: none;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.rangeSlider:hover {
+  background: var(--color-300, var(--blue-300));
+}
+
+.rangeSlider:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.rangeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--color-500, var(--blue-500));
+  cursor: pointer;
+  border: 2px solid var(--color-0, var(--blue-0));
+  transition: all var(--transition-normal);
+}
+
+.rangeSlider::-webkit-slider-thumb:hover {
+  background: var(--color-600, var(--blue-600));
+  transform: scale(1.1);
+}
+
+.rangeSlider:disabled::-webkit-slider-thumb {
+  background: var(--color-300, var(--blue-300));
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Firefox */
+.rangeSlider::-moz-range-thumb {
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--color-500, var(--blue-500));
+  cursor: pointer;
+  border: 2px solid var(--color-0, var(--blue-0));
+  transition: all var(--transition-normal);
+}
+
+.rangeSlider::-moz-range-thumb:hover {
+  background: var(--color-600, var(--blue-600));
+  transform: scale(1.1);
+}
+
+.rangeSlider:disabled::-moz-range-thumb {
+  background: var(--color-300, var(--blue-300));
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Track styling for Firefox */
+.rangeSlider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-200, var(--blue-200));
+  border: none;
+}
+
+.rangeSlider:disabled::-moz-range-track {
+  background: var(--color-200, var(--blue-200));
+  opacity: 0.5;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { sessionsGrid, sessionsMenu } from './HeaderMenu.module.css';
 import { SessionOption } from './SessionOption';
+import { CustomSessionOption } from './CustomSessionOption';
 import { AutoStartToggle } from './AutoStartToggle';
 
 export const HeaderMenu = ({
@@ -8,6 +9,7 @@ export const HeaderMenu = ({
   sessionOptions,
   selectedSession,
   onSessionChange,
+  onCustomSessionChange,
   autoStartSettings,
   onPomodoroToggle,
   onBreakToggle,
@@ -31,6 +33,13 @@ export const HeaderMenu = ({
           />
         ))}
       </div>
+
+      <CustomSessionOption
+        isSelected={selectedSession === 'custom'}
+        onCustomSessionChange={onCustomSessionChange}
+        onSessionSelect={onSessionChange}
+        disabled={isRunning}
+      />
 
       <AutoStartToggle
         pomodoroAutoStart={autoStartSettings.pomodoro}

@@ -8,18 +8,28 @@ import { useAudio } from '@hooks/useAudio';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useThemeCSS } from '@hooks/useTheme';
 import { useTimer } from '@hooks/useTimer';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 export const AppContainer = () => {
   const [activeTab, setActiveTab] = useState('pomodoro');
   const [selectedSession, setSelectedSession] = useState('classic-pomodoro');
+  const [customSessionConfig, setCustomSessionConfig] = useState({
+    pomodoro: { minutes: 25, seconds: 0 },
+    shortBreak: { minutes: 5, seconds: 0 },
+    longBreak: { minutes: 15, seconds: 0 }
+  });
 
   // Inicializar audio
   const { initAudio, playSessionCompleteSound } = useAudio();
 
   // Obtener la configuración de la sesión seleccionada
   const currentSession = sessionOptions.find((session) => session.id === selectedSession);
-  const sessionConfig = currentSession ? currentSession.config : sessionOptions[1].config;
+  const sessionConfig =
+    selectedSession === 'custom'
+      ? customSessionConfig
+      : currentSession
+      ? currentSession.config
+      : sessionOptions[1].config;
 
   // Convertir la configuración a formato de minutos y segundos
   const getTimerConfig = (tab) => {
@@ -72,7 +82,12 @@ export const AppContainer = () => {
     setActiveTab(tabId);
     changeCycle(tabId);
   };
+
   const handleSessionChange = (sessionId) => setSelectedSession(sessionId);
+
+  const handleCustomSessionChange = useCallback((config) => {
+    setCustomSessionConfig(config);
+  }, []);
 
   return (
     <TimerProvider isRunning={isRunning}>
@@ -81,6 +96,7 @@ export const AppContainer = () => {
         selectedSession={selectedSession}
         isRunning={isRunning}
         onSessionChange={handleSessionChange}
+        onCustomSessionChange={handleCustomSessionChange}
         autoStartSettings={autoStartSettings}
         onPomodoroToggle={togglePomodoroAutoStart}
         onBreakToggle={toggleBreakAutoStart}
