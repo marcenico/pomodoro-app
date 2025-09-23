@@ -63,12 +63,12 @@ export const CustomSessionOption = ({
 
   return (
     <div
-      className={`${customSessionContainer} ${isSelected ? selected : ''} d-flex f-col gap-16 p-16`}
+      className={`${customSessionContainer} ${isSelected ? selected : ''} d-flex f-col p-16`}
       onClick={handleContainerClick}
       style={{ cursor: isRunning || disabled ? 'default' : 'pointer' }}>
       <div className={`d-flex ai-center jc-between`}>
         <div className="d-flex f-col">
-          <span className="t-md t-bold t-950">Sesión Personalizada</span>
+          <span className="t-md t-bold t-950">Custom session</span>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ export const CustomSessionOption = ({
           disabled={isRunning || disabled}
         />
         <RangeSlider
-          label="Descanso Corto"
+          label="Short break"
           value={shortBreakMinutes}
           min={1}
           max={30}
@@ -90,7 +90,7 @@ export const CustomSessionOption = ({
           disabled={isRunning || disabled}
         />
         <RangeSlider
-          label="Descanso Largo"
+          label="Long break"
           value={longBreakMinutes}
           min={1}
           max={60}
