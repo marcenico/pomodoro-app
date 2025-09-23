@@ -8,22 +8,22 @@
 }
 
 .sliderValue {
-  text-align: right;
   background: var(--color-100, var(--blue-100));
-  padding: 0.25rem 0.5rem;
   border-radius: 4px;
   border: 1px solid var(--color-200, var(--blue-200));
+  padding: 0.25rem 0.5rem;
+  text-align: right;
 }
 
 .rangeSlider {
   -webkit-appearance: none;
   appearance: none;
-  height: 0.5rem;
-  border-radius: 4px;
   background: var(--color-200, var(--blue-200));
+  border-radius: 4px;
+  cursor: pointer;
+  height: 0.5rem;
   outline: none;
   transition: all var(--transition-normal);
-  cursor: pointer;
 }
 
 .rangeSlider:hover {
@@ -31,21 +31,21 @@
 }
 
 .rangeSlider:disabled {
-  opacity: 0.5;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 /* Webkit browsers (Chrome, Safari, Edge) */
 .rangeSlider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 1.125rem;
-  height: 1.125rem;
-  border-radius: 50%;
   background: var(--color-500, var(--blue-500));
-  cursor: pointer;
+  border-radius: 50%;
   border: 2px solid var(--color-0, var(--blue-0));
+  cursor: pointer;
+  height: 1.125rem;
   transition: all var(--transition-normal);
+  width: 1.125rem;
 }
 
 .rangeSlider::-webkit-slider-thumb:hover {
@@ -61,13 +61,13 @@
 
 /* Firefox */
 .rangeSlider::-moz-range-thumb {
-  width: 1.125rem;
-  height: 1.125rem;
-  border-radius: 50%;
   background: var(--color-500, var(--blue-500));
-  cursor: pointer;
+  border-radius: 50%;
   border: 2px solid var(--color-0, var(--blue-0));
+  cursor: pointer;
+  height: 1.125rem;
   transition: all var(--transition-normal);
+  width: 1.125rem;
 }
 
 .rangeSlider::-moz-range-thumb:hover {
@@ -83,10 +83,10 @@
 
 /* Track styling for Firefox */
 .rangeSlider::-moz-range-track {
-  height: 0.5rem;
-  border-radius: 4px;
   background: var(--color-200, var(--blue-200));
+  border-radius: 4px;
   border: none;
+  height: 0.5rem;
 }
 
 .rangeSlider:disabled::-moz-range-track {

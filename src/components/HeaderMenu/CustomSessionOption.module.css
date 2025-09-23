@@ -2,8 +2,8 @@
   background: var(--color-0, var(--blue-50));
   border-radius: 8px;
   border: 2px solid var(--color-100, var(--blue-100));
-  transition: all var(--transition-normal);
   position: relative;
+  transition: all var(--transition-normal);
   user-select: none;
 }
 

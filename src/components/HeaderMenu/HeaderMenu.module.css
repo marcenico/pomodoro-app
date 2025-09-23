@@ -2,19 +2,19 @@
   animation: slideDown 0.3s ease-out;
   background: var(--color-50, var(--blue-50));
   border-radius: 12px;
-  margin-top: -4px;
-  position: absolute;
-  top: 100%;
-  z-index: 100;
-  transition: background var(--transition-normal);
-  right: 1rem;
   left: 1rem;
+  margin-top: -4px;
   min-width: auto;
+  position: absolute;
+  right: 1rem;
+  top: 100%;
+  transition: background var(--transition-normal);
+  z-index: 100;
 
   @media (width > 768px) {
+    left: unset;
     min-width: auto;
     right: 20px;
-    left: unset;
   }
 }
 

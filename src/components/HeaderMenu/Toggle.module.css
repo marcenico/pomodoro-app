@@ -6,56 +6,56 @@
 }
 
 .toggleItem {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
   border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
   transition: all var(--transition-normal);
   user-select: none;
 }
 
 .toggleLabel {
   flex: 1;
-  text-align: left;
   margin: 0 0.5rem 0 0;
+  text-align: left;
 }
 
 .toggleSwitch {
-  position: relative;
   display: inline-block;
-  width: 3rem;
   height: 1.5rem;
+  position: relative;
+  width: 3rem;
 }
 
 .toggleSwitch input {
+  height: 0;
   opacity: 0;
   width: 0;
-  height: 0;
 }
 
 .toggleSlider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background-color: var(--color-200, var(--blue-200));
-  transition: all var(--transition-normal);
   border-radius: 1.5rem;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all var(--transition-normal);
 }
 
 .toggleSlider:before {
-  position: absolute;
+  background-color: var(--color-0, var(--blue-0));
+  border-radius: 50%;
+  bottom: 0.1875rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   content: '';
   height: 1.125rem;
-  width: 1.125rem;
   left: 0.1875rem;
-  bottom: 0.1875rem;
-  background-color: var(--color-0, var(--blue-0));
+  position: absolute;
   transition: all var(--transition-normal);
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 1.125rem;
 }
 
 .toggleSwitch input:checked + .toggleSlider {
@@ -67,8 +67,8 @@
 }
 
 .toggleSwitch input:disabled + .toggleSlider {
-  opacity: 0.5;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .toggleSwitch input:disabled + .toggleSlider:before {
@@ -76,8 +76,8 @@
 }
 
 .toggleItem:disabled {
-  opacity: 0.5;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .toggleItem:disabled:hover {
