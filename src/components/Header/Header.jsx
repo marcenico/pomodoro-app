@@ -1,5 +1,5 @@
 import { HeaderMenu } from '@components/HeaderMenu/HeaderMenu';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { header, settingsButton, settingsIcon } from './Header.module.css';
 
 export const Header = ({
@@ -14,10 +14,16 @@ export const Header = ({
   onBreakToggle
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const buttonRef = useRef(null);
 
   // Memoizar la función de toggle para evitar re-renders innecesarios
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
+  }, []);
+
+  // Función para cerrar el menú
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
   }, []);
 
   // Cerrar el menú cuando el timer esté corriendo
@@ -29,6 +35,7 @@ export const Header = ({
     <header className={`${header} d-flex jc-between ai-center`}>
       <h1 className="t-xl t-bold t-950">The Pomodoro Technique</h1>
       <button
+        ref={buttonRef}
         className={`${settingsButton} d-flex ai-center jc-center`}
         onClick={toggleMenu}
         disabled={isRunning}
@@ -81,6 +88,8 @@ export const Header = ({
         onPomodoroToggle={onPomodoroToggle}
         onBreakToggle={onBreakToggle}
         isRunning={isRunning}
+        onClose={closeMenu}
+        buttonRef={buttonRef}
       />
     </header>
   );

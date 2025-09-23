@@ -1,4 +1,5 @@
 import React from 'react';
+import { useClickOutside } from '@hooks/useClickOutside';
 import { sessionsGrid, sessionsMenu } from './HeaderMenu.module.css';
 import { SessionOption } from './SessionOption';
 import { CustomSessionOption } from './CustomSessionOption';
@@ -14,13 +15,19 @@ export const HeaderMenu = ({
   autoStartSettings,
   onPomodoroToggle,
   onBreakToggle,
-  isRunning
+  isRunning,
+  onClose,
+  buttonRef
 }) => {
+  const menuRef = useClickOutside(() => {
+    if (isOpen && onClose) onClose();
+  }, buttonRef);
+
   if (!isOpen) return null;
   const handleSessionSelect = (sessionId) => onSessionChange(sessionId);
 
   return (
-    <div className={`${sessionsMenu} d-flex f-col gap-12 p-16`}>
+    <div ref={menuRef} className={`${sessionsMenu} d-flex f-col gap-12 p-16`}>
       <h2 className={`t-lg t-bold t-950`}>Sessions settings</h2>
 
       <div className={`${sessionsGrid} gap-1`}>

@@ -1,7 +1,7 @@
 import { useTimerContext } from '@contexts/TimerContext';
 import React, { useEffect, useRef, useState } from 'react';
-import { RangeSlider } from './RangeSlider';
 import { customSessionContainer, selected } from './CustomSessionOption.module.css';
+import { RangeSlider } from './RangeSlider';
 
 export const CustomSessionOption = ({
   isSelected = false,
@@ -35,8 +35,7 @@ export const CustomSessionOption = ({
         longBreak: { minutes: longBreakMinutes, seconds: 0 }
       });
     }
-  }, [pomodoroMinutes, shortBreakMinutes, longBreakMinutes, onCustomSessionChange]);
-
+  }, [pomodoroMinutes, shortBreakMinutes, longBreakMinutes]);
   const handlePomodoroChange = (e) => {
     const value = parseInt(e.target.value);
     setPomodoroMinutes(value);
