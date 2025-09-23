@@ -1,5 +1,6 @@
 import React from 'react';
-import { toggleContainer, toggleItem, toggleLabel, toggleSlider, toggleSwitch } from './AutoStartToggle.module.css';
+import { toggleContainer } from './AutoStartToggle.module.css';
+import { Toggle } from './Toggle';
 
 export const AutoStartToggle = ({
   pomodoroAutoStart,
@@ -9,40 +10,24 @@ export const AutoStartToggle = ({
   disabled = false
 }) => {
   return (
-    <div className={`${toggleContainer} d-flex f-col pt-12 gap-12 `}>
-      <div className={toggleItem} onClick={onPomodoroToggle}>
-        <label className={`${toggleLabel} t-md t-bold t-950`} htmlFor="pomodoro-auto-start">
-          Auto start pomodoros
-        </label>
-        <div className={toggleSwitch}>
-          <input
-            type="checkbox"
-            id="pomodoro-auto-start"
-            checked={pomodoroAutoStart}
-            onChange={() => {}}
-            disabled={disabled}
-            aria-label="Activate or deactivate auto start for pomodoro"
-          />
-          <span className={toggleSlider}></span>
-        </div>
-      </div>
+    <div className={`${toggleContainer} d-flex f-col pt-12 gap-12`}>
+      <Toggle
+        id="pomodoro-auto-start"
+        label="Auto start pomodoros"
+        checked={pomodoroAutoStart}
+        onChange={onPomodoroToggle}
+        disabled={disabled}
+        ariaLabel="Activate or deactivate auto start for pomodoro"
+      />
 
-      <div className={toggleItem} onClick={onBreakToggle}>
-        <label className={`${toggleLabel} t-md t-bold t-950`} htmlFor="break-auto-start">
-          Auto start breaks
-        </label>
-        <div className={toggleSwitch}>
-          <input
-            type="checkbox"
-            id="break-auto-start"
-            checked={breakAutoStart}
-            onChange={() => {}}
-            disabled={disabled}
-            aria-label="Activate or deactivate auto start for break"
-          />
-          <span className={toggleSlider}></span>
-        </div>
-      </div>
+      <Toggle
+        id="break-auto-start"
+        label="Auto start breaks"
+        checked={breakAutoStart}
+        onChange={onBreakToggle}
+        disabled={disabled}
+        ariaLabel="Activate or deactivate auto start for break"
+      />
     </div>
   );
 };
