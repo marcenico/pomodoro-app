@@ -4,20 +4,18 @@ import { Timer } from '@components/Timer/Timer';
 import { TimerControls } from '@components/TimerControls/TimerControls';
 import { TimerProvider } from '@contexts/TimerContext';
 import { sessionOptions } from '@data/sessionOptions';
+import { useAppSettings } from '@hooks/useAppSettings';
 import { useAudio } from '@hooks/useAudio';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
 import { useThemeCSS } from '@hooks/useTheme';
 import { useTimer } from '@hooks/useTimer';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const AppContainer = () => {
   const [activeTab, setActiveTab] = useState('pomodoro');
-  const [selectedSession, setSelectedSession] = useState('classic-pomodoro');
-  const [customSessionConfig, setCustomSessionConfig] = useState({
-    pomodoro: { minutes: 25, seconds: 0 },
-    shortBreak: { minutes: 5, seconds: 0 },
-    longBreak: { minutes: 15, seconds: 0 }
-  });
+
+  // Usar el hook de configuración de la aplicación
+  const { selectedSession, customSessionConfig, handleSessionChange, handleCustomSessionChange } = useAppSettings();
 
   // Inicializar audio
   const { initAudio, playSessionCompleteSound } = useAudio();
@@ -82,12 +80,6 @@ export const AppContainer = () => {
     setActiveTab(tabId);
     changeCycle(tabId);
   };
-
-  const handleSessionChange = (sessionId) => setSelectedSession(sessionId);
-
-  const handleCustomSessionChange = useCallback((config) => {
-    setCustomSessionConfig(config);
-  }, []);
 
   return (
     <TimerProvider isRunning={isRunning}>
