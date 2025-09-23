@@ -10,7 +10,7 @@ export const AutoStartToggle = ({
   disabled = false
 }) => {
   return (
-    <div className={`${toggleContainer} d-flex f-col pt-12 gap-12`}>
+    <div className={`${toggleContainer} d-flex f-col gap-12`}>
       <Toggle
         id="pomodoro-auto-start"
         label="Auto start pomodoros"

@@ -9,26 +9,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
-  padding: 0.5rem;
   border-radius: 8px;
   transition: all var(--transition-normal);
   user-select: none;
 }
 
-.toggleItem:hover:not(:disabled) {
-  background: var(--color-100, var(--blue-100));
-}
-
-.toggleItem:active:not(:disabled) {
-  background: var(--color-200, var(--blue-200));
-}
-
 .toggleLabel {
   flex: 1;
   text-align: left;
-  margin: 0;
-  cursor: pointer;
+  margin: 0 0.5rem 0 0;
 }
 
 .toggleSwitch {
