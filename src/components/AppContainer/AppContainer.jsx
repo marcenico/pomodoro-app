@@ -35,6 +35,7 @@ export const AppContainer = () => {
   };
 
   const {
+    autoStartSettings,
     changeCycle,
     currentCycle,
     isPaused,
@@ -45,9 +46,8 @@ export const AppContainer = () => {
     startTimer,
     stopTimer,
     time,
-    autoStartSettings,
-    togglePomodoroAutoStart,
-    toggleBreakAutoStart
+    toggleBreakAutoStart,
+    togglePomodoroAutoStart
   } = useTimer({
     ...getTimerConfig(activeTab),
     pomodoroConfig: sessionConfig.pomodoro,
@@ -84,26 +84,27 @@ export const AppContainer = () => {
   return (
     <TimerProvider isRunning={isRunning}>
       <Header
-        sessionOptions={sessionOptions}
-        selectedSession={selectedSession}
-        isRunning={isRunning}
-        onSessionChange={handleSessionChange}
-        onCustomSessionChange={handleCustomSessionChange}
-        customSessionConfig={customSessionConfig}
         autoStartSettings={autoStartSettings}
-        onPomodoroToggle={togglePomodoroAutoStart}
+        customSessionConfig={customSessionConfig}
+        isRunning={isRunning}
         onBreakToggle={toggleBreakAutoStart}
+        onCustomSessionChange={handleCustomSessionChange}
+        onPomodoroToggle={togglePomodoroAutoStart}
+        onSessionChange={handleSessionChange}
+        selectedSession={selectedSession}
+        sessionOptions={sessionOptions}
       />
       <main className={`container p-16`}>
         <div className={`d-flex f-col gap-12 t-center`}>
           <TabSelector
             activeTab={activeTab}
+            currentCycle={currentCycle}
             isRunning={isRunning}
             onTabChange={handleTabChange}
-            currentCycle={currentCycle}
           />
-          <Timer time={time} currentCycle={currentCycle} />
+          <Timer currentCycle={currentCycle} time={time} />
           <TimerControls
+            initAudio={initAudio}
             isPaused={isPaused}
             isRunning={isRunning}
             pauseTimer={pauseTimer}
@@ -111,7 +112,6 @@ export const AppContainer = () => {
             resetTimer={resetTimer}
             startTimer={startTimer}
             stopTimer={stopTimer}
-            initAudio={initAudio}
           />
         </div>
       </main>
