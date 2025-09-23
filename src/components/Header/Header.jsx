@@ -5,6 +5,7 @@ import { header, settingsButton, settingsIcon } from './Header.module.css';
 export const Header = ({
   onSessionChange,
   onCustomSessionChange,
+  customSessionConfig,
   selectedSession,
   sessionOptions,
   isRunning,
@@ -75,6 +76,7 @@ export const Header = ({
         selectedSession={selectedSession}
         onSessionChange={onSessionChange}
         onCustomSessionChange={onCustomSessionChange}
+        customSessionConfig={customSessionConfig}
         autoStartSettings={autoStartSettings}
         onPomodoroToggle={onPomodoroToggle}
         onBreakToggle={onBreakToggle}

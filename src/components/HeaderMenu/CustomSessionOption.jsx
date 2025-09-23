@@ -1,34 +1,41 @@
 import { useTimerContext } from '@contexts/TimerContext';
-import React, { useEffect, useState } from 'react';
-import {
-  customSessionContainer,
-  rangeSlider,
-  sliderLabel,
-  sliderRow,
-  sliderValue,
-  selected
-} from './CustomSessionOption.module.css';
+import React, { useEffect, useRef, useState } from 'react';
+import { RangeSlider } from './RangeSlider';
+import { customSessionContainer, selected } from './CustomSessionOption.module.css';
 
 export const CustomSessionOption = ({
   isSelected = false,
   onCustomSessionChange,
   onSessionSelect,
+  customConfig,
   disabled = false
 }) => {
   const { isRunning } = useTimerContext();
   const [pomodoroMinutes, setPomodoroMinutes] = useState(25);
   const [shortBreakMinutes, setShortBreakMinutes] = useState(5);
   const [longBreakMinutes, setLongBreakMinutes] = useState(15);
+  const isInitialized = useRef(false);
 
+  // Sincronizar el estado local con la configuración externa solo una vez
   useEffect(() => {
-    if (onCustomSessionChange) {
+    if (customConfig && !isInitialized.current) {
+      setPomodoroMinutes(customConfig.pomodoro?.minutes || 25);
+      setShortBreakMinutes(customConfig.shortBreak?.minutes || 5);
+      setLongBreakMinutes(customConfig.longBreak?.minutes || 15);
+      isInitialized.current = true;
+    }
+  }, [customConfig]);
+
+  // Actualizar la configuración cuando cambien los valores localmente
+  useEffect(() => {
+    if (onCustomSessionChange && isInitialized.current) {
       onCustomSessionChange({
         pomodoro: { minutes: pomodoroMinutes, seconds: 0 },
         shortBreak: { minutes: shortBreakMinutes, seconds: 0 },
         longBreak: { minutes: longBreakMinutes, seconds: 0 }
       });
     }
-  }, [pomodoroMinutes, shortBreakMinutes, longBreakMinutes]);
+  }, [pomodoroMinutes, shortBreakMinutes, longBreakMinutes, onCustomSessionChange]);
 
   const handlePomodoroChange = (e) => {
     const value = parseInt(e.target.value);
@@ -65,47 +72,30 @@ export const CustomSessionOption = ({
         </div>
       </div>
 
-      <div className={`d-flex f-col gap-12`}>
-        <div className={`${sliderRow} d-flex ai-end jc-between`}>
-          <label className={`${sliderLabel} t-sm t-regular t-950`}>Pomodoro</label>
-          <span className={`${sliderValue} t-sm t-bold t-600`}>{pomodoroMinutes} min</span>
-        </div>
-        <input
-          type="range"
-          min="5"
-          max="60"
+      <div className="d-flex f-col gap-12">
+        <RangeSlider
+          label="Pomodoro"
           value={pomodoroMinutes}
+          min={1}
+          max={60}
           onChange={handlePomodoroChange}
           disabled={isRunning || disabled}
-          className={rangeSlider}
         />
-
-        <div className={`${sliderRow} d-flex ai-end jc-between`}>
-          <label className={`${sliderLabel} t-sm t-regular t-950`}>Descanso Corto</label>
-          <span className={`${sliderValue} t-sm t-bold t-600`}>{shortBreakMinutes} min</span>
-        </div>
-        <input
-          type="range"
-          min="1"
-          max="30"
+        <RangeSlider
+          label="Descanso Corto"
           value={shortBreakMinutes}
+          min={1}
+          max={30}
           onChange={handleShortBreakChange}
           disabled={isRunning || disabled}
-          className={rangeSlider}
         />
-
-        <div className={`${sliderRow} d-flex ai-end jc-between`}>
-          <label className={`${sliderLabel} t-sm t-regular t-950`}>Descanso Largo</label>
-          <span className={`${sliderValue} t-sm t-bold t-600`}>{longBreakMinutes} min</span>
-        </div>
-        <input
-          type="range"
-          min="5"
-          max="60"
+        <RangeSlider
+          label="Descanso Largo"
           value={longBreakMinutes}
+          min={1}
+          max={60}
           onChange={handleLongBreakChange}
           disabled={isRunning || disabled}
-          className={rangeSlider}
         />
       </div>
     </div>

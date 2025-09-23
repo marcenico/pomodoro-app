@@ -97,6 +97,7 @@ export const AppContainer = () => {
         isRunning={isRunning}
         onSessionChange={handleSessionChange}
         onCustomSessionChange={handleCustomSessionChange}
+        customSessionConfig={customSessionConfig}
         autoStartSettings={autoStartSettings}
         onPomodoroToggle={togglePomodoroAutoStart}
         onBreakToggle={toggleBreakAutoStart}

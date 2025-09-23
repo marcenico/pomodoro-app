@@ -10,6 +10,7 @@ export const HeaderMenu = ({
   selectedSession,
   onSessionChange,
   onCustomSessionChange,
+  customSessionConfig,
   autoStartSettings,
   onPomodoroToggle,
   onBreakToggle,
@@ -38,6 +39,7 @@ export const HeaderMenu = ({
         isSelected={selectedSession === 'custom'}
         onCustomSessionChange={onCustomSessionChange}
         onSessionSelect={onSessionChange}
+        customConfig={customSessionConfig}
         disabled={isRunning}
       />
 
