@@ -126,8 +126,8 @@ export const useTimer = ({
               const newState = handleAutomaticCycleTransition(currentCycle, completedPomodoros);
               setStorage(newState);
 
-              // Retornar estado de finalización usando utilidad
-              return createTimerEndState(currentCycle, completedPomodoros, startTime, duration);
+              // Retornar el nuevo estado directamente (ya incluye la transición de ciclo)
+              return newState;
             } else {
               // Retornar estado de ejecución usando utilidad
               return createTimerRunningState(remainingTime, currentCycle, completedPomodoros, startTime, duration);
