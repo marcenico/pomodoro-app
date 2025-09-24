@@ -54,7 +54,8 @@
   height: 1.125rem;
   left: 0.1875rem;
   position: absolute;
-  transition: all var(--transition-normal);
+  transition: background-color var(--transition-normal), transform var(--transition-normal),
+    box-shadow var(--transition-normal);
   width: 1.125rem;
 }
 
@@ -73,6 +74,11 @@
 
 .toggleSwitch input:disabled + .toggleSlider:before {
   background-color: var(--color-300, var(--blue-300));
+}
+
+.toggleSwitch input:focus + .toggleSlider {
+  outline: 2px solid var(--color-600, var(--blue-600));
+  outline-offset: 2px;
 }
 
 .toggleItem:disabled {
