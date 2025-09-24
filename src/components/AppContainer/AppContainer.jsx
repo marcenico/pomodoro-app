@@ -7,6 +7,7 @@ import { sessionOptions } from '@data/sessionOptions';
 import { useAppSettings } from '@hooks/useAppSettings';
 import { useAudio } from '@hooks/useAudio';
 import { useDocumentTitle } from '@hooks/useDocumentTitle';
+import { useFaviconProgress } from '@hooks/useFaviconProgress';
 import { useThemeCSS } from '@hooks/useTheme';
 import { useTimer } from '@hooks/useTimer';
 import React, { useEffect, useState } from 'react';
@@ -68,6 +69,9 @@ export const AppContainer = () => {
 
   // Actualizar el título del documento con el tiempo del timer
   useDocumentTitle(time, currentCycle, isRunning, isPaused);
+
+  // Actualizar favicon con progreso del temporizador
+  useFaviconProgress(time, currentCycle, isRunning, isPaused, getTimerConfig(currentCycle));
 
   // Inicializar audio automáticamente en desktop
   useEffect(() => {
