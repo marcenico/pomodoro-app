@@ -1,9 +1,10 @@
-import React from 'react';
 import { useClickOutside } from '@hooks/useClickOutside';
+import { useEscapeKey } from '@hooks/useEscapeKey';
+import React from 'react';
+import { AutoStartToggle } from './AutoStartToggle';
+import { CustomSessionOption } from './CustomSessionOption';
 import { sessionsGrid, sessionsMenu } from './HeaderMenu.module.css';
 import { SessionOption } from './SessionOption';
-import { CustomSessionOption } from './CustomSessionOption';
-import { AutoStartToggle } from './AutoStartToggle';
 
 export const HeaderMenu = ({
   isOpen,
@@ -22,6 +23,10 @@ export const HeaderMenu = ({
   const menuRef = useClickOutside(() => {
     if (isOpen && onClose) onClose();
   }, buttonRef);
+
+  useEscapeKey(() => {
+    if (isOpen && onClose) onClose();
+  }, isOpen);
 
   if (!isOpen) return null;
   const handleSessionSelect = (sessionId) => onSessionChange(sessionId);
