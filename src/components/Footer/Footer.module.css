@@ -14,3 +14,21 @@
   text-align: center;
   transition: color var(--transition-normal);
 }
+
+.footerLinkButton {
+  background: none;
+  border: none;
+  color: var(--color-950, var(--blue-950));
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}
+
+.footerLinkButton:hover {
+  text-decoration: none;
+}
+
+.footerLinkButton:focus,
+.footerLinkButton:active {
+  outline: unset;
+}
