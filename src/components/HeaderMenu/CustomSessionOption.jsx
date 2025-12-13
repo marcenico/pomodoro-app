@@ -1,6 +1,6 @@
 import { useTimerContext } from '@contexts/TimerContext';
 import React, { useEffect, useRef, useState } from 'react';
-import { customSessionContainer, selected } from './CustomSessionOption.module.css';
+import { customSessionContainer, resetButton, rotating, selected } from './CustomSessionOption.module.css';
 import { RangeSlider } from './RangeSlider';
 
 export const CustomSessionOption = ({
@@ -14,6 +14,7 @@ export const CustomSessionOption = ({
   const [pomodoroMinutes, setPomodoroMinutes] = useState(25);
   const [shortBreakMinutes, setShortBreakMinutes] = useState(5);
   const [longBreakMinutes, setLongBreakMinutes] = useState(15);
+  const [isRotating, setIsRotating] = useState(false);
   const isInitialized = useRef(false);
 
   // Sincronizar el estado local con la configuración externa solo una vez
@@ -60,11 +61,28 @@ export const CustomSessionOption = ({
     }
   };
 
+  const handleResetClick = (e) => {
+    // Click en reset, solo restablece los valores sin cambiar la sesión activa
+    e.stopPropagation(); // Previene que el evento se propague al contenedor padre
+    setIsRotating(true);
+    setPomodoroMinutes(25);
+    setShortBreakMinutes(5);
+    setLongBreakMinutes(15);
+    // Remover la clase después de que termine la animación
+    setTimeout(() => setIsRotating(false), 300);
+  };
+
   return (
     <div
       className={`${customSessionContainer} ${isSelected ? selected : ''} d-flex f-col p-16`}
       onClick={handleContainerClick}
       style={{ cursor: isRunning || disabled ? 'default' : 'pointer' }}>
+      <button
+        className={`${resetButton} ${isRotating ? rotating : ''} d-flex ai-center jc-center t-950`}
+        onClick={handleResetClick} disabled={isRunning || disabled}>
+        <svg fill="none" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><use href="#refresh" /></svg>
+      </button>
+
       <div className={`d-flex ai-center jc-between`}>
         <div className="d-flex f-col">
           <span className="t-md t-bold t-950">Custom session</span>
