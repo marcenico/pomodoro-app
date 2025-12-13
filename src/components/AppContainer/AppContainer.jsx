@@ -1,3 +1,4 @@
+import { Footer } from '@components/Footer/Footer';
 import { Header } from '@components/Header/Header';
 import { TabSelector } from '@components/TabSelector/TabSelector';
 import { Timer } from '@components/Timer/Timer';
@@ -98,7 +99,7 @@ export const AppContainer = () => {
         selectedSession={selectedSession}
         sessionOptions={sessionOptions}
       />
-      <main className={`container p-16`}>
+      <main className={`container f-1 p-16`}>
         <div className={`d-flex f-col gap-12 t-center`}>
           <TabSelector
             activeTab={activeTab}
@@ -119,6 +120,7 @@ export const AppContainer = () => {
           />
         </div>
       </main>
+      <Footer />
     </TimerProvider>
   );
 };

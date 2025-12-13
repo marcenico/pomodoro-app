@@ -1,0 +1,19 @@
+.footer {
+  background-color: red;
+  border-top: 1px solid var(--color-50, var(--blue-50));
+  margin: 0 auto;
+  max-width: 1168px;
+  padding: 1rem;
+  transition: border-color var(--transition-normal);
+  width: 100%;
+}
+
+.footerText {
+  color: var(--color-950, var(--blue-950));
+  font-size: 0.875rem;
+  font-weight: var(--text-regular);
+  margin: 0;
+  text-align: center;
+  transition: color var(--transition-normal);
+}
+

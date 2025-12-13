@@ -1,4 +1,5 @@
 export * from './AppContainer/AppContainer';
+export * from './Footer/Footer';
 export * from './Header/Header';
 export * from './HeaderMenu/HeaderMenu';
 export * from './TabSelector/TabSelector';
