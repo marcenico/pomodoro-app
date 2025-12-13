@@ -218,6 +218,7 @@
 /* Contenedores */
 .container {
   max-width: 1168px;
+  width: 100%;
 }
 
 .w-100 {
