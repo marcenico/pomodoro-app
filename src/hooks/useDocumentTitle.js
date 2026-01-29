@@ -12,7 +12,7 @@ export const useDocumentTitle = (time, currentCycle, isRunning, isPaused) => {
     const { minutes, seconds } = time;
     const defaultTitle = 'The Pomodoro Technique';
     const messages = { pomodoro: 'Focus time', shortBreak: 'Break time', longBreak: 'Long break time' };
-    const cycleEmoji = { pomodoro: '🍅', shortBreak: '☕', longBreak: '🛌' };
+    const cycleEmoji = { pomodoro: '🍅', shortBreak: '☕', longBreak: '🚶‍♂️' };
 
     if (!isRunning) {
       document.title = defaultTitle;
