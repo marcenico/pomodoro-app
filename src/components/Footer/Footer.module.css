@@ -22,10 +22,13 @@
   cursor: pointer;
   font: inherit;
   padding: 0;
+  transition: color var(--transition-normal), opacity var(--transition-normal);
 }
 
 .footerLinkButton:hover {
-  text-decoration: none;
+  color: var(--color-600, var(--blue-600));
+  opacity: 0.9;
+  text-decoration: underline;
 }
 
 .footerLinkButton:focus,
