@@ -33,6 +33,42 @@ const BADGE_COLORS = {
   longBreak: '#1c5ba1'
 };
 
+// Mirrors src/hooks/useSoundSelection.js.
+const chooseSound = (cycle, completedPomodoros) => {
+  switch (cycle) {
+    case 'pomodoro':
+      return completedPomodoros > 3 ? 'longBreak' : 'shortBreak';
+    case 'shortBreak':
+    case 'longBreak':
+      return 'pomodoro';
+    default:
+      return 'pomodoro';
+  }
+};
+
+// Si el popup está abierto, su propio timer ya reproduce el sonido in-page
+// (más preciso); tocarlo también desde acá sonaría duplicado/superpuesto.
+const isPopupOpen = async () => {
+  try {
+    const contexts = await chrome.runtime.getContexts({ contextTypes: ['POPUP'] });
+    return contexts.length > 0;
+  } catch {
+    return false;
+  }
+};
+
+const playCompletionSound = async (soundKey) => {
+  if (await chrome.offscreen.hasDocument()) {
+    await chrome.offscreen.closeDocument();
+  }
+
+  await chrome.offscreen.createDocument({
+    url: `offscreen.html?sound=${soundKey}`,
+    reasons: ['AUDIO_PLAYBACK'],
+    justification: 'Play the pomodoro session-complete sound while the popup is closed.'
+  });
+};
+
 const remainingMinutesLabel = (endTime) => {
   const remainingMs = endTime - Date.now();
   return remainingMs <= 0 ? '0' : String(Math.ceil(remainingMs / 60000));
@@ -79,6 +115,10 @@ const notifySessionComplete = async () => {
     message: message.body(completedPomodoros),
     priority: 2
   });
+
+  if (!(await isPopupOpen())) {
+    await playCompletionSound(chooseSound(cycle, completedPomodoros));
+  }
 
   await clearSession();
 };
