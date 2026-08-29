@@ -1,10 +1,3 @@
-// MV3 service worker. A setInterval in the popup only runs while the popup
-// document is alive, so it can't notify the user once they close it. This
-// worker uses chrome.alarms (OS-scheduled, survives the worker being
-// unloaded) to fire the "session complete" notification and keep the
-// toolbar badge showing the remaining minutes, regardless of whether the
-// popup is open.
-
 const END_ALARM = 'pomodoro-session-end';
 const TICK_ALARM = 'pomodoro-badge-tick';
 const STORAGE_KEY = 'activeSession';
@@ -50,7 +43,9 @@ const chooseSound = (cycle, completedPomodoros) => {
 // (más preciso); tocarlo también desde acá sonaría duplicado/superpuesto.
 const isPopupOpen = async () => {
   try {
-    const contexts = await chrome.runtime.getContexts({ contextTypes: ['POPUP'] });
+    const contexts = await chrome.runtime.getContexts({
+      contextTypes: ['POPUP']
+    });
     return contexts.length > 0;
   } catch {
     return false;
@@ -82,8 +77,13 @@ const updateBadge = async () => {
     return;
   }
 
-  await chrome.action.setBadgeBackgroundColor({ color: BADGE_COLORS[session.cycle] || BADGE_COLORS.pomodoro });
-  await chrome.action.setBadgeText({ text: remainingMinutesLabel(session.endTime) });
+  await chrome.action.setBadgeBackgroundColor({
+    color: BADGE_COLORS[session.cycle] || BADGE_COLORS.pomodoro
+  });
+
+  await chrome.action.setBadgeText({
+    text: remainingMinutesLabel(session.endTime)
+  });
 };
 
 const clearSession = async () => {
@@ -104,9 +104,14 @@ const scheduleSession = async ({ endTime, cycle, completedPomodoros }) => {
     return;
   }
 
-  await chrome.storage.local.set({ [STORAGE_KEY]: { endTime, cycle, completedPomodoros } });
+  await chrome.storage.local.set({
+    [STORAGE_KEY]: { endTime, cycle, completedPomodoros }
+  });
   await chrome.alarms.create(END_ALARM, { when: endTime });
-  await chrome.alarms.create(TICK_ALARM, { delayInMinutes: 1, periodInMinutes: 1 });
+  await chrome.alarms.create(TICK_ALARM, {
+    delayInMinutes: 1,
+    periodInMinutes: 1
+  });
   await updateBadge();
 };
 
