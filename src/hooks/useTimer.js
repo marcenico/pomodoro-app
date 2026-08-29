@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { useLocalStorage } from './useLocalStorage';
-import { useCycleLogic } from './useCycleLogic';
-import { useSessionNotifications } from './useSessionNotifications';
+import { isExtensionContext } from '../helpers/extensionContext';
 import { useAutoStart } from './useAutoStart';
+import { useCycleLogic } from './useCycleLogic';
 import { useExtensionAlarm } from './useExtensionAlarm';
+import { useLocalStorage } from './useLocalStorage';
+import { useSessionNotifications } from './useSessionNotifications';
+
+const STALE_COMPLETION_THRESHOLD_MS = 2000;
+
 import {
   calculateRemainingTime,
-  timeToMilliseconds,
-  createTimerEndState,
   createTimerRunningState,
-  shouldUpdateTimer
+  shouldUpdateTimer,
+  timeToMilliseconds
 } from '../helpers/timerUtils';
 
 export const useTimer = ({
@@ -129,9 +132,14 @@ export const useTimer = ({
 
             if (remainingTime.minutes <= 0 && remainingTime.seconds <= 0) {
               // Manejar finalización completa de sesión (audio + notificación)
-              handleSessionComplete(currentCycle, completedPomodoros + 1, playSessionCompleteSound).catch(
-                console.error
-              );
+              const elapsedSinceEnd = now - (startTime + duration);
+              const isStaleCompletion = isExtensionContext() && elapsedSinceEnd > STALE_COMPLETION_THRESHOLD_MS;
+
+              handleSessionComplete(
+                currentCycle,
+                completedPomodoros + 1,
+                isStaleCompletion ? null : playSessionCompleteSound
+              ).catch(console.error);
 
               const newState = handleAutomaticCycleTransition(currentCycle, completedPomodoros);
               setStorage(newState);
