@@ -20,10 +20,15 @@ export const useExtensionAlarm = ({ isPaused, isRunning, startTime, duration, cu
   useEffect(() => {
     if (!isExtensionContext()) return;
 
-    const isActive = isRunning && !isPaused && startTime && duration;
+    const endTime = startTime && duration ? startTime + duration : null;
+    // Si el popup estuvo cerrado y el ciclo ya terminó, el estado guardado en
+    // localStorage sigue marcado como "corriendo" hasta que el propio timer
+    // lo detecte y lo corrija (próximo tick). No reprogramar ese endTime ya
+    // pasado: el service worker lo dispararía casi al instante y duplicaría
+    // la notificación que ya mostró mientras el popup estaba cerrado.
+    const isActive = isRunning && !isPaused && endTime && endTime > Date.now();
 
     if (isActive) {
-      const endTime = startTime + duration;
       const scheduledKey = `${endTime}-${currentCycle}`;
 
       if (scheduledKeyRef.current === scheduledKey) return;

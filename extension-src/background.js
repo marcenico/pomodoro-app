@@ -96,6 +96,14 @@ const clearSession = async () => {
 };
 
 const scheduleSession = async ({ endTime, cycle, completedPomodoros }) => {
+  // Defensa extra: ignorar solicitudes con un endTime ya pasado (por ejemplo,
+  // si el popup se reabre con un estado stale) en vez de disparar un alarm
+  // casi inmediato que duplicaría la notificación/sonido de fin de sesión.
+  if (endTime <= Date.now()) {
+    await clearSession();
+    return;
+  }
+
   await chrome.storage.local.set({ [STORAGE_KEY]: { endTime, cycle, completedPomodoros } });
   await chrome.alarms.create(END_ALARM, { when: endTime });
   await chrome.alarms.create(TICK_ALARM, { delayInMinutes: 1, periodInMinutes: 1 });
