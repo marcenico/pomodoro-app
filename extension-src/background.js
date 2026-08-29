@@ -28,9 +28,9 @@ const NOTIFICATION_MESSAGES = {
 };
 
 const BADGE_COLORS = {
-  pomodoro: '#e24333',
-  shortBreak: '#3f7d32',
-  longBreak: '#1c5ba1'
+  pomodoro: '#4faeff',
+  shortBreak: '#22c55e',
+  longBreak: '#10b981'
 };
 
 // Mirrors src/hooks/useSoundSelection.js.
