@@ -1,0 +1,15 @@
+/*
+ * Fixed size for the extension's popup window.
+ * Chrome sizes the popup to the document's rendered size, so we pin
+ * html/body explicitly instead of letting layout (100dvh, etc.) decide it.
+ * Adjust the values below to change the popup's width/height.
+ */
+html,
+body {
+  width: 400px !important;
+  min-width: 400px !important;
+  height: 600px !important;
+  min-height: 600px !important;
+  max-height: 600px !important;
+  overflow-y: auto !important;
+}
