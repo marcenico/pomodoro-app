@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useNotifications } from './useNotifications';
 import { useSoundSelection } from './useSoundSelection';
+import { isExtensionContext } from '../helpers/extensionContext';
 
 /**
  * Hook para manejar notificaciones y sonidos de finalización de sesión
@@ -25,8 +26,11 @@ export const useSessionNotifications = () => {
         playSessionCompleteSound(sound);
       }
 
-      // Mostrar notificación
-      await showSessionCompleteNotification(cycleType, completedPomodoros);
+      // En la extensión, el service worker ya muestra la notificación vía
+      // chrome.alarms (funciona con el popup cerrado); evitar duplicarla aquí.
+      if (!isExtensionContext()) {
+        await showSessionCompleteNotification(cycleType, completedPomodoros);
+      }
     },
     [chooseSound, showSessionCompleteNotification]
   );

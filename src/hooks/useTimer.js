@@ -3,6 +3,7 @@ import { useLocalStorage } from './useLocalStorage';
 import { useCycleLogic } from './useCycleLogic';
 import { useSessionNotifications } from './useSessionNotifications';
 import { useAutoStart } from './useAutoStart';
+import { useExtensionAlarm } from './useExtensionAlarm';
 import {
   calculateRemainingTime,
   timeToMilliseconds,
@@ -35,6 +36,15 @@ export const useTimer = ({
   const { autoStartSettings, togglePomodoroAutoStart, toggleBreakAutoStart, getAutoStartForCycle } = useAutoStart();
   const intervalRef = useRef(null);
   const lastUpdateRef = useRef(0);
+
+  useExtensionAlarm({
+    isPaused: storedValue.isPaused,
+    isRunning: storedValue.isRunning,
+    startTime: storedValue.startTime,
+    duration: storedValue.duration,
+    currentCycle: storedValue.currentCycle,
+    completedPomodoros: storedValue.completedPomodoros
+  });
 
   const configs = { pomodoroConfig, shortBreakConfig, longBreakConfig };
 

@@ -3,6 +3,10 @@
   "name": "The Pomodoro Technique",
   "description": "Timer to apply the Pomodoro Technique. Focus sessions, short and long breaks.",
   "version": "1.0.0",
+  "permissions": ["alarms", "notifications", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "index.html",
     "default_icon": {
