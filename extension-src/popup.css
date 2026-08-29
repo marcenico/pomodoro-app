@@ -8,8 +8,8 @@ html,
 body {
   width: 400px !important;
   min-width: 400px !important;
-  height: 500px !important;
-  min-height: 500px !important;
-  max-height: 500px !important;
+  height: 600px !important;
+  min-height: 600px !important;
+  max-height: 600px !important;
   overflow-y: auto !important;
 }
