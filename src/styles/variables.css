@@ -26,6 +26,73 @@
   --dark-green-600: #059669;
   --dark-green-950: #064e3b;
 
+  --blue-dark-0: #0a1320;
+  --blue-dark-50: #122236;
+  --blue-dark-100: #1a3150;
+  --blue-dark-200: #28486f;
+  --blue-dark-300: #3f6893;
+  --blue-dark-500: #4faeff;
+  --blue-dark-600: #88c9ff;
+  --blue-dark-950: #e3f0ff;
+
+  --green-dark-0: #07130c;
+  --green-dark-50: #0f2217;
+  --green-dark-100: #163221;
+  --green-dark-200: #214a31;
+  --green-dark-300: #2f6a45;
+  --green-dark-500: #22c55e;
+  --green-dark-600: #4ade80;
+  --green-dark-950: #dcfce7;
+
+  --dark-green-dark-0: #041311;
+  --dark-green-dark-50: #0a211d;
+  --dark-green-dark-100: #0f302a;
+  --dark-green-dark-200: #17463d;
+  --dark-green-dark-300: #226356;
+  --dark-green-dark-500: #10b981;
+  --dark-green-dark-600: #34d399;
+  --dark-green-dark-950: #d1fae5;
+
+  /* Paleta semántica por ciclo (tema claro) */
+  --pomodoro-0: var(--blue-0);
+  --pomodoro-50: var(--blue-50);
+  --pomodoro-100: var(--blue-100);
+  --pomodoro-200: var(--blue-200);
+  --pomodoro-300: var(--blue-300);
+  --pomodoro-500: var(--blue-500);
+  --pomodoro-600: var(--blue-600);
+  --pomodoro-950: var(--blue-950);
+
+  --short-break-0: var(--green-0);
+  --short-break-50: var(--green-50);
+  --short-break-100: var(--green-100);
+  --short-break-200: var(--green-200);
+  --short-break-300: var(--green-300);
+  --short-break-500: var(--green-500);
+  --short-break-600: var(--green-600);
+  --short-break-950: var(--green-950);
+
+  --long-break-0: var(--dark-green-0);
+  --long-break-50: var(--dark-green-50);
+  --long-break-100: var(--dark-green-100);
+  --long-break-200: var(--dark-green-200);
+  --long-break-300: var(--dark-green-300);
+  --long-break-500: var(--dark-green-500);
+  --long-break-600: var(--dark-green-600);
+  --long-break-950: var(--dark-green-950);
+
+  /* Paleta activa: useThemeCSS la reasigna según el ciclo */
+  --color-0: var(--pomodoro-0);
+  --color-50: var(--pomodoro-50);
+  --color-100: var(--pomodoro-100);
+  --color-200: var(--pomodoro-200);
+  --color-300: var(--pomodoro-300);
+  --color-500: var(--pomodoro-500);
+  --color-600: var(--pomodoro-600);
+  --color-950: var(--pomodoro-950);
+
+  color-scheme: light;
+
   --font-family: 'Advent Pro', sans-serif, system-ui;
   --text-light: 300;
   --text-regular: 400;
@@ -37,4 +104,68 @@
   --breakpoint-sm: 385px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1440px;
+}
+
+:root[data-theme='dark'] {
+  --pomodoro-0: var(--blue-dark-0);
+  --pomodoro-50: var(--blue-dark-50);
+  --pomodoro-100: var(--blue-dark-100);
+  --pomodoro-200: var(--blue-dark-200);
+  --pomodoro-300: var(--blue-dark-300);
+  --pomodoro-500: var(--blue-dark-500);
+  --pomodoro-600: var(--blue-dark-600);
+  --pomodoro-950: var(--blue-dark-950);
+
+  --short-break-0: var(--green-dark-0);
+  --short-break-50: var(--green-dark-50);
+  --short-break-100: var(--green-dark-100);
+  --short-break-200: var(--green-dark-200);
+  --short-break-300: var(--green-dark-300);
+  --short-break-500: var(--green-dark-500);
+  --short-break-600: var(--green-dark-600);
+  --short-break-950: var(--green-dark-950);
+
+  --long-break-0: var(--dark-green-dark-0);
+  --long-break-50: var(--dark-green-dark-50);
+  --long-break-100: var(--dark-green-dark-100);
+  --long-break-200: var(--dark-green-dark-200);
+  --long-break-300: var(--dark-green-dark-300);
+  --long-break-500: var(--dark-green-dark-500);
+  --long-break-600: var(--dark-green-dark-600);
+  --long-break-950: var(--dark-green-dark-950);
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --pomodoro-0: var(--blue-dark-0);
+    --pomodoro-50: var(--blue-dark-50);
+    --pomodoro-100: var(--blue-dark-100);
+    --pomodoro-200: var(--blue-dark-200);
+    --pomodoro-300: var(--blue-dark-300);
+    --pomodoro-500: var(--blue-dark-500);
+    --pomodoro-600: var(--blue-dark-600);
+    --pomodoro-950: var(--blue-dark-950);
+
+    --short-break-0: var(--green-dark-0);
+    --short-break-50: var(--green-dark-50);
+    --short-break-100: var(--green-dark-100);
+    --short-break-200: var(--green-dark-200);
+    --short-break-300: var(--green-dark-300);
+    --short-break-500: var(--green-dark-500);
+    --short-break-600: var(--green-dark-600);
+    --short-break-950: var(--green-dark-950);
+
+    --long-break-0: var(--dark-green-dark-0);
+    --long-break-50: var(--dark-green-dark-50);
+    --long-break-100: var(--dark-green-dark-100);
+    --long-break-200: var(--dark-green-dark-200);
+    --long-break-300: var(--dark-green-dark-300);
+    --long-break-500: var(--dark-green-dark-500);
+    --long-break-600: var(--dark-green-dark-600);
+    --long-break-950: var(--dark-green-dark-950);
+
+    color-scheme: dark;
+  }
 }

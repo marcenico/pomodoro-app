@@ -71,11 +71,11 @@
 }
 
 .t-300 {
-  color: var(--blue-300);
+  color: var(--color-300, var(--blue-300));
 }
 
 .t-100 {
-  color: var(--blue-100);
+  color: var(--color-100, var(--blue-100));
 }
 
 .t-0 {

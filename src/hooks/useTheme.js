@@ -9,17 +9,17 @@ export const useThemeCSS = (currentCycle) => {
     switch (currentCycle) {
       case 'longBreak':
         arrayColors.forEach((color) => {
-          root.style.setProperty(`--color-${color}`, `var(--dark-green-${color})`);
+          root.style.setProperty(`--color-${color}`, `var(--long-break-${color})`);
         });
         break;
       case 'shortBreak':
         arrayColors.forEach((color) => {
-          root.style.setProperty(`--color-${color}`, `var(--green-${color})`);
+          root.style.setProperty(`--color-${color}`, `var(--short-break-${color})`);
         });
         break;
       default:
         arrayColors.forEach((color) => {
-          root.style.setProperty(`--color-${color}`, `var(--blue-${color})`);
+          root.style.setProperty(`--color-${color}`, `var(--pomodoro-${color})`);
         });
         break;
     }
