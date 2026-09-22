@@ -13,6 +13,12 @@
 
 .themeToggle:focus,
 .themeToggle:active {
+  outline: none;
+}
+
+.themeToggle:focus .pillTrack,
+.themeToggle:active .pillTrack {
+  border-radius: 1.125rem;
   outline: 1px solid var(--color-600, var(--blue-600));
   outline-offset: 2px;
 }
@@ -88,6 +94,7 @@
 
 .mobileButton:focus,
 .mobileButton:active {
+  border-radius: 8px;
   outline: 1px solid var(--color-600, var(--blue-600));
   outline-offset: 1px;
 }
