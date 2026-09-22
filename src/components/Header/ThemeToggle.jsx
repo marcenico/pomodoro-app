@@ -18,7 +18,7 @@ export const ThemeToggle = () => {
       {/* Desktop (>= 768px): switch con perilla que muestra el modo activo */}
       <button
         type="button"
-        className={`${themeToggle} d-flex ai-center jc-center`}
+        className={themeToggle}
         onClick={handleClick}
         aria-pressed={isDark}
         aria-label={label}>
@@ -39,7 +39,7 @@ export const ThemeToggle = () => {
       {/* Mobile (< 768px): botón de 44px con el ícono del modo destino */}
       <button
         type="button"
-        className={`${mobileButton} d-flex ai-center jc-center`}
+        className={mobileButton}
         onClick={handleClick}
         aria-pressed={isDark}
         aria-label={label}>

@@ -1,10 +1,12 @@
 /* Botón desktop: pill con perilla deslizante */
 .themeToggle {
+  align-items: center;
   background: none;
   border: none;
   cursor: pointer;
-  display: none;
+  display: none; /* se muestra recién en el media query de abajo (>768px) */
   height: 2.75rem; /* 44px, mismo alto táctil que settingsButton */
+  justify-content: center;
   padding: 0;
   width: 4.5rem;
 }
@@ -66,12 +68,15 @@
 
 /* Botón mobile: ícono único con el modo destino */
 .mobileButton {
+  align-items: center;
   background: var(--color-50, var(--blue-50));
   border-radius: 8px;
   border: 1px solid var(--color-200, var(--blue-200));
   color: var(--color-950, var(--blue-950));
   cursor: pointer;
+  display: flex; /* se oculta recién en el media query de abajo (>768px) */
   height: 2.75rem; /* 44px */
+  justify-content: center;
   padding: 0.5rem;
   transition: background-color var(--transition-normal), border-color var(--transition-normal);
   width: 2.75rem; /* 44px */
