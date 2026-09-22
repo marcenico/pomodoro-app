@@ -1,0 +1,94 @@
+/* Botón desktop: pill con perilla deslizante */
+.themeToggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  height: 2.75rem; /* 44px, mismo alto táctil que settingsButton */
+  padding: 0;
+  width: 4.5rem;
+}
+
+.themeToggle:focus,
+.themeToggle:active {
+  outline: 1px solid var(--color-600, var(--blue-600));
+  outline-offset: 2px;
+}
+
+@media (width > 768px) {
+  .themeToggle {
+    display: flex;
+  }
+}
+
+.pillTrack {
+  background: var(--color-50, var(--blue-50));
+  border-radius: 1.125rem;
+  border: 1px solid var(--color-200, var(--blue-200));
+  box-sizing: border-box;
+  height: 2.25rem; /* 36px */
+  position: relative;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+  width: 100%;
+}
+
+.ghostIcon {
+  color: var(--color-950, var(--blue-950));
+  height: 1rem;
+  left: 2.8125rem; /* modo claro: hueco del ícono oscuro a la derecha */
+  opacity: 0.55;
+  position: absolute;
+  top: 0.5625rem;
+  transition: left var(--transition-normal);
+  width: 1rem;
+}
+
+.knob {
+  background: var(--color-500, var(--blue-500));
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  color: var(--color-0, var(--blue-0));
+  height: 1.75rem; /* 28px */
+  left: 0.1875rem; /* modo claro: perilla a la izquierda */
+  position: absolute;
+  top: 0.1875rem;
+  transition: left var(--transition-normal), background-color var(--transition-normal);
+  width: 1.75rem;
+}
+
+.themeToggle[aria-pressed='true'] .knob {
+  left: 2.4375rem; /* modo oscuro: perilla a la derecha */
+}
+
+.themeToggle[aria-pressed='true'] .ghostIcon {
+  left: 0.625rem; /* modo oscuro: hueco del ícono claro a la izquierda */
+}
+
+/* Botón mobile: ícono único con el modo destino */
+.mobileButton {
+  background: var(--color-50, var(--blue-50));
+  border-radius: 8px;
+  border: 1px solid var(--color-200, var(--blue-200));
+  color: var(--color-950, var(--blue-950));
+  cursor: pointer;
+  height: 2.75rem; /* 44px */
+  padding: 0.5rem;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+  width: 2.75rem; /* 44px */
+}
+
+.mobileButton:hover {
+  background-color: var(--color-100, var(--blue-100));
+}
+
+.mobileButton:focus,
+.mobileButton:active {
+  outline: 1px solid var(--color-600, var(--blue-600));
+  outline-offset: 1px;
+}
+
+@media (width > 768px) {
+  .mobileButton {
+    display: none;
+  }
+}
