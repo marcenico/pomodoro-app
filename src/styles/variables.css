@@ -93,6 +93,11 @@
 
   color-scheme: light;
 
+  /* Elevación: en claro pasan desapercibidas, en oscuro despegan del fondo */
+  --menu-border: transparent;
+  --menu-shadow: none;
+  --start-ring: none;
+
   --font-family: 'Advent Pro', sans-serif, system-ui;
   --text-light: 300;
   --text-regular: 400;
@@ -135,6 +140,10 @@
   --long-break-950: var(--dark-green-dark-950);
 
   color-scheme: dark;
+
+  --menu-border: var(--color-200, var(--blue-dark-200));
+  --menu-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  --start-ring: 0 0 0 6px var(--color-50, var(--blue-dark-50));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -167,5 +176,9 @@
     --long-break-950: var(--dark-green-dark-950);
 
     color-scheme: dark;
+
+    --menu-border: var(--color-200, var(--blue-dark-200));
+    --menu-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    --start-ring: 0 0 0 6px var(--color-50, var(--blue-dark-50));
   }
 }

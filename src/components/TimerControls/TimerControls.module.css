@@ -11,8 +11,9 @@
 
 .btnStart {
   background-color: var(--color-500, var(--blue-500));
+  box-shadow: var(--start-ring, none);
   height: 6.25rem;
-  transition: background-color var(--transition-normal);
+  transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
   width: 6.25rem;
   z-index: 10;
 }
